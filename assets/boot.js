@@ -121,4 +121,56 @@
     const mode = btn.getAttribute('data-auth') || 'signin';
     showAuthModal(mode);
   }, {passive:true});
+
+  // One-time magic effect for first-time visitors on home page
+  function isFirstVisit(){
+    try{ return !localStorage.getItem('magicShown_v1'); }catch(e){ return false; }
+  }
+  function markMagicShown(){ try{ localStorage.setItem('magicShown_v1','1'); }catch(e){} }
+
+  function runMagicEffect(){
+    if (!isFirstVisit()) return;
+    const path = (location.pathname||'').split('/').pop() || 'index.html';
+    if (!(path === '' || path === 'index.html' || path === 'home.html')) return;
+    markMagicShown();
+    const container = document.createElement('div');
+    container.className = 'magic-overlay';
+    document.body.appendChild(container);
+    const colors = ['#ff6fa3','#ffb3d9','#7bd3ff','#9be7ff','#ffd88a'];
+    const count = 22;
+    for(let i=0;i<count;i++){
+      const p = document.createElement('div');
+      p.className = 'magic-particle ' + (i%3===0? 'large': (i%2===0?'small':''));
+      const color = colors[i % colors.length];
+      p.style.background = color;
+      // random start position near center
+      const x = 50 + (Math.random()*160 - 80);
+      const y = 50 + (Math.random()*40 - 20);
+      p.style.left = x + '%';
+      p.style.top = y + '%';
+      container.appendChild(p);
+      // animate using WAAPI if available
+      const dx = (Math.random()*360 - 180);
+      const dy = -120 - Math.random()*160;
+      const rot = (Math.random()*720 - 360);
+      const dur = 900 + Math.random()*800;
+      if (p.animate){
+        p.animate([
+          {transform:'translateY(0) scale(1)', opacity:1},
+          {transform:`translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(0.3)`, opacity:0}
+        ],{duration:dur, easing:'cubic-bezier(.2,.9,.2,1)', fill:'forwards'});
+      } else {
+        // fallback: simple CSS transition
+        p.style.transition = `transform ${dur}ms cubic-bezier(.2,.9,.2,1), opacity ${dur}ms linear`;
+        setTimeout(()=>{ p.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(0.3)`; p.style.opacity= '0'; }, 20);
+      }
+    }
+    // cleanup after longest animation
+    setTimeout(()=>{ try{ container.remove(); }catch(e){} }, 2200);
+  }
+
+  // trigger magic on boot finish
+  window.addEventListener('boot:done', ()=>{
+    try{ runMagicEffect(); }catch(e){}
+  }, {passive:true});
 })();

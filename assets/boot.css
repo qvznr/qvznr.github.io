@@ -148,6 +148,16 @@ html,body{
   border-color: rgba(255,111,163,0.18);
 }
 
+/* One-time magic effect (first visit) */
+.magic-overlay{position:fixed;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:center;z-index:14000}
+.magic-particle{position:absolute;width:12px;height:12px;border-radius:50%;opacity:0;transform:translateY(0) scale(0.8);mix-blend-mode:screen}
+.magic-particle.small{width:8px;height:8px}
+.magic-particle.large{width:16px;height:16px}
+
+@media (prefers-reduced-motion: reduce){
+  .magic-overlay, .magic-particle{display:none}
+}
+
 /* Auth header (top-right) */
 .auth-header{
   position:fixed;
