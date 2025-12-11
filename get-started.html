@@ -16,9 +16,29 @@
       .steps{margin:20px 0;display:grid;gap:14px}
       .step{padding:14px;border-radius:8px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02)}
       .back{display:inline-block;margin-top:18px;padding:10px 14px;background:rgba(255,255,255,0.02);border-radius:8px;border:1px solid rgba(255,255,255,0.03)}
+      /* Boot overlay (shared styles) */
+      .boot-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#04060a;z-index:9999;transition:opacity .35s ease}
+      .boot-inner{display:flex;flex-direction:column;align-items:center;gap:10px}
+      .boot-logo{font-family:'Orbitron',Inter,system-ui,Segoe UI,Roboto,Arial;font-weight:900;color:#ff4081;font-size:clamp(20px,6vw,48px);letter-spacing:1px;opacity:0;transform:translateY(6px) scale(.98);animation:bootLogo 900ms cubic-bezier(.2,.9,.2,1) forwards .15s}
+      .boot-sub{color:rgba(255,255,255,0.6);font-size:13px;opacity:0;transform:translateY(6px);animation:bootLogo 900ms cubic-bezier(.2,.9,.2,1) forwards .25s}
+      .boot-loader{display:flex;gap:8px;margin-top:8px}
+      .boot-loader span{display:block;width:8px;height:8px;background:linear-gradient(90deg,#ff4081,#007aff);border-radius:50%;opacity:.75;transform:scale(.8);animation:bootPulse 900ms infinite ease-in-out}
+      .boot-loader span:nth-child(2){animation-delay:120ms}
+      .boot-loader span:nth-child(3){animation-delay:240ms}
+      @keyframes bootLogo{to{opacity:1;transform:translateY(0) scale(1)}}
+      @keyframes bootPulse{0%{transform:scale(.8);opacity:.6}50%{transform:scale(1.1);opacity:1}100%{transform:scale(.8);opacity:.6}}
     </style>
   </head>
   <body>
+    <div id="boot-overlay" class="boot-overlay" role="presentation" aria-hidden="false">
+      <div class="boot-inner">
+        <div class="boot-logo">Python Notes</div>
+        <div class="boot-sub">Made by Aditya</div>
+        <div class="boot-loader" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <h1>Get Started</h1>
       <p class="muted">A short, practical guide to begin using Python.</p>
@@ -63,5 +83,19 @@ if __name__ == "__main__":
         <a class="back" href="home.html">← Back to Python Notes</a>
       </div>
     </div>
+    <script>
+      (function(){
+        const overlay = document.getElementById('boot-overlay');
+        if(!overlay) return;
+        const DURATION = 2000;
+        let hide = () => {
+          overlay.style.opacity = '0';
+          overlay.setAttribute('aria-hidden','true');
+          setTimeout(()=>overlay.remove(),400);
+        };
+        setTimeout(hide, DURATION);
+        overlay.addEventListener('click', hide, {passive:true});
+      })();
+    </script>
   </body>
 </html>

@@ -68,6 +68,18 @@
         left:50%;
         transform:translateX(-50%) rotate(20deg);
       }
+      /* Boot overlay */
+      .boot-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#04060a;z-index:9999;transition:opacity .35s ease;}
+      .boot-inner{display:flex;flex-direction:column;align-items:center;gap:10px}
+      .boot-logo{font-family:'Orbitron',Inter,system-ui,Segoe UI,Roboto,Arial;font-weight:900;color:#ff4081;font-size:clamp(28px,6vw,72px);letter-spacing:1px;text-transform:none;opacity:0;transform:translateY(6px) scale(.98);animation:bootLogo 900ms cubic-bezier(.2,.9,.2,1) forwards .15s}
+      .boot-sub{color:rgba(255,255,255,0.6);font-size:14px;opacity:0;transform:translateY(6px);animation:bootLogo 900ms cubic-bezier(.2,.9,.2,1) forwards .25s}
+      .boot-loader{display:flex;gap:8px;margin-top:12px}
+      .boot-loader span{display:block;width:10px;height:10px;background:linear-gradient(90deg,#ff4081,#007aff);border-radius:50%;opacity:.75;transform:scale(.8);animation:bootPulse 900ms infinite ease-in-out}
+      .boot-loader span:nth-child(2){animation-delay:120ms}
+      .boot-loader span:nth-child(3){animation-delay:240ms}
+
+      @keyframes bootLogo{to{opacity:1;transform:translateY(0) scale(1)}}
+      @keyframes bootPulse{0%{transform:scale(.8);opacity:.6}50%{transform:scale(1.1);opacity:1}100%{transform:scale(.8);opacity:.6}}
       /* keep content readable on very small screens */
       @media (max-width:480px){
         .hero{padding:40px 16px}
@@ -76,11 +88,35 @@
     </style>
   </head>
   <body>
+    <div id="boot-overlay" class="boot-overlay" role="presentation" aria-hidden="false">
+      <div class="boot-inner">
+        <div class="boot-logo">Python Notes</div>
+        <div class="boot-sub">Made by Aditya</div>
+        <div class="boot-loader" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
     <main class="hero" role="main">
       <div class="glow" aria-hidden="true"></div>
       <h1 class="title">Python Notes</h1>
       <p class="sub">Python Notes Made by Aditya</p>
       <a class="cta" href="get-started.html">Get Started</a>
     </main>
+    <script>
+      (function(){
+        const overlay = document.getElementById('boot-overlay');
+        if(!overlay) return;
+        // Auto-hide after animation (2s), allow click to skip
+        const DURATION = 2000;
+        let hide = () => {
+          overlay.style.opacity = '0';
+          overlay.setAttribute('aria-hidden','true');
+          setTimeout(()=>overlay.remove(),400);
+        };
+        setTimeout(hide, DURATION);
+        overlay.addEventListener('click', hide, {passive:true});
+      })();
+    </script>
   </body>
 </html>
