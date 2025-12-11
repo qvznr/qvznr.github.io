@@ -106,6 +106,31 @@ html,body{
 .cta, .step, .back{transition:transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms cubic-bezier(.2,.9,.2,1), opacity 180ms ease}
 .boot-inner{transition:transform 360ms cubic-bezier(.2,.9,.2,1), opacity 360ms cubic-bezier(.2,.9,.2,1)}
 
+/* Fluid, subtle animations */
+@keyframes floatY { 0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)} }
+@keyframes driftX { 0%{transform:translateX(0) rotate(0)}50%{transform:translateX(6px) rotate(.25deg)}100%{transform:translateX(0) rotate(0)} }
+@keyframes glowShift { 0%{filter:blur(60px) opacity:.28}50%{filter:blur(72px) opacity:.36}100%{filter:blur(60px) opacity:.28} }
+
+/* apply gentle motion to hero elements */
+.glow{animation:driftX 10s ease-in-out infinite; will-change:transform,filter}
+.title{animation:floatY 8s ease-in-out infinite; will-change:transform}
+
+/* float cards slightly with stagger when visible */
+.card, .step{animation:floatY 9s ease-in-out infinite; animation-delay:0s; will-change:transform}
+.card:nth-of-type(2), .step:nth-of-type(2){animation-delay:1.2s}
+.card:nth-of-type(3), .step:nth-of-type(3){animation-delay:2.4s}
+
+/* add a slow shimmer on CTA for life */
+.cta::after{transition:transform 2.8s linear;}
+.cta:hover::after{transform:skewX(-18deg) translateX(180%)}
+
+/* subtle dynamic glow behind spinner */
+.boot-ring::before{animation:glowShift 6.5s ease-in-out infinite}
+
+@media (prefers-reduced-motion: reduce){
+  .glow, .title, .card, .step, .boot-ring::before{animation:none}
+}
+
 /* Subtle glass borders for site boxes */
 .card, .step, .cta, .back{
   border: 1px solid rgba(255,255,255,0.06);
