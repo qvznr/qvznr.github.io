@@ -6,6 +6,7 @@
     <title>Get Started — Python Notes</title>
     <meta name="description" content="Get started with Python — Python Notes by Aditya">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/boot.css">
     <style>
       body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;line-height:1.6;margin:0;background:#0b0f1a;color:#e6eef8;padding:40px}
       .container{max-width:900px;margin:0 auto}
@@ -18,43 +19,11 @@
       .step:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
       .back{display:inline-block;margin-top:18px;padding:10px 14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:10px;border:1px solid rgba(255,255,255,0.06);backdrop-filter:blur(8px) saturate(140%);box-shadow:0 10px 26px rgba(2,6,23,0.5);transition:transform .18s ease}
       .back:hover{transform:translateY(-4px)}
-      /* glassier boot overlay */
-      .boot-inner{padding:22px;border-radius:12px;position:relative;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.06);box-shadow:0 18px 40px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.03);backdrop-filter: blur(12px) saturate(140%);overflow:hidden}
-      .boot-inner::before{content:"";position:absolute;left:-60%;top:-10%;width:60%;height:120%;background:linear-gradient(120deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02));transform:skewX(-18deg) translateX(-100%);animation:liquidSheen 2.6s linear infinite;opacity:0.85;pointer-events:none}
-      .boot-logo{font-family:'Orbitron',Inter,system-ui,Segoe UI,Roboto,Arial;font-weight:900;color:#ff4081;font-size:clamp(20px,6vw,48px);letter-spacing:1px;opacity:0;transform:translateY(6px) scale(.98);animation:bootLogo 900ms cubic-bezier(.2,.9,.2,1) forwards .15s;text-shadow:0 6px 22px rgba(255,64,129,0.08)}
-      .boot-sub{color:rgba(255,255,255,0.75);font-size:13px;opacity:0;transform:translateY(6px);animation:bootLogo 900ms cubic-bezier(.2,.9,.2,1) forwards .25s}
-      .boot-loader span{box-shadow:0 6px 18px rgba(0,0,0,0.45),0 0 28px rgba(255,64,129,0.06)}
-      @keyframes liquidSheen{0%{transform:skewX(-18deg) translateX(-100%)}50%{transform:skewX(-18deg) translateX(160%)}100%{transform:skewX(-18deg) translateX(160%)}}
-      /* Boot overlay (shared styles) */
-      .boot-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#04060a;z-index:9999;transition:opacity .35s ease}
-      .boot-inner{display:flex;flex-direction:column;align-items:center;gap:10px}
-      .boot-logo{font-family:'Orbitron',Inter,system-ui,Segoe UI,Roboto,Arial;font-weight:900;color:#ff4081;font-size:clamp(20px,6vw,48px);letter-spacing:1px;opacity:0;transform:translateY(6px) scale(.98);animation:bootLogo 900ms cubic-bezier(.2,.9,.2,1) forwards .15s}
-      .boot-sub{color:rgba(255,255,255,0.6);font-size:13px;opacity:0;transform:translateY(6px);animation:bootLogo 900ms cubic-bezier(.2,.9,.2,1) forwards .25s}
-      /* modern circular spinner */
-      .boot-ring{display:flex;align-items:center;justify-content:center;margin-top:12px}
-      .spinner{width:56px;height:56px;display:block}
-      .spinner .path{stroke:#ff4081;stroke-linecap:round;stroke-dasharray:89,200;stroke-dashoffset:0;animation:dash 1.4s ease-in-out infinite, spin 2s linear infinite;transform-origin:50% 50%}
-      @keyframes spin{100%{transform:rotate(360deg)}}
-      @keyframes dash{0%{stroke-dasharray:1,200;stroke-dashoffset:0}50%{stroke-dasharray:100,200;stroke-dashoffset:-15px}100%{stroke-dasharray:89,200;stroke-dashoffset:-124px}}
-      @media (prefers-reduced-motion: reduce){
-        .spinner .path{animation:none}
-      }
-      @keyframes bootLogo{to{opacity:1;transform:translateY(0) scale(1)}}
-      @keyframes bootPulse{0%{transform:scale(.8);opacity:.6}50%{transform:scale(1.1);opacity:1}100%{transform:scale(.8);opacity:.6}}
+      /* Boot overlay styles moved to assets/boot.css */
     </style>
   </head>
   <body>
-    <div id="boot-overlay" class="boot-overlay" role="presentation" aria-hidden="false">
-      <div class="boot-inner">
-        <div class="boot-logo">Python Notes</div>
-        <div class="boot-sub">-Aditya</div>
-        <div class="boot-ring" aria-hidden="true">
-          <svg class="spinner" viewBox="0 0 50 50" role="img" aria-label="Loading">
-            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke="#ff4081" stroke-width="4" stroke-linecap="round"></circle>
-          </svg>
-        </div>
-      </div>
-    </div>
+    <!-- boot overlay injected by assets/boot.js -->
     <div class="container">
       <h1>Get Started</h1>
       <p class="muted">A short, practical guide to begin using Python.</p>
@@ -99,19 +68,6 @@ if __name__ == "__main__":
         <a class="back" href="home.html">← Back to Python Notes</a>
       </div>
     </div>
-    <script>
-      (function(){
-        const overlay = document.getElementById('boot-overlay');
-        if(!overlay) return;
-        const DURATION = 2000;
-        let hide = () => {
-          overlay.style.opacity = '0';
-          overlay.setAttribute('aria-hidden','true');
-          setTimeout(()=>overlay.remove(),400);
-        };
-        setTimeout(hide, DURATION);
-        overlay.addEventListener('click', hide, {passive:true});
-      })();
-    </script>
+    <script src="assets/boot.js"></script>
   </body>
 </html>

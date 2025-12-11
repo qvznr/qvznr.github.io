@@ -6,6 +6,7 @@
     <title>Python Notes</title>
     <meta name="description" content="Python Notes">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/boot.css">
     <style>
       :root{--bg1:#0b0f1a;--bg2:#0d0b2a;--accent:#ff4081;--muted:rgba(255,255,255,0.7)}
       html,body{height:100%;}
@@ -68,25 +69,7 @@
         left:50%;
         transform:translateX(-50%) rotate(20deg);
       }
-      /* Boot overlay */
-      .boot-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#04060a;z-index:9999;transition:opacity .35s ease;}
-      .boot-inner{display:flex;flex-direction:column;align-items:center;gap:10px;padding:28px;border-radius:16px;position:relative;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.06);box-shadow:0 20px 50px rgba(2,6,23,0.65), inset 0 1px 0 rgba(255,255,255,0.03);backdrop-filter: blur(12px) saturate(140%);overflow:hidden}
-      .boot-inner::before{content:"";position:absolute;left:-60%;top:-10%;width:60%;height:120%;background:linear-gradient(120deg, rgba(255,255,255,0.14), rgba(255,255,255,0.02));transform:skewX(-18deg) translateX(-100%);animation:liquidSheen 2.6s linear infinite;opacity:0.8;pointer-events:none}
-      .boot-logo{font-family:'Orbitron',Inter,system-ui,Segoe UI,Roboto,Arial;font-weight:900;color:#ff4081;font-size:clamp(28px,6vw,72px);letter-spacing:1px;text-transform:none;opacity:0;transform:translateY(6px) scale(.98);animation:bootLogo 900ms cubic-bezier(.2,.9,.2,1) forwards .15s;text-shadow:0 6px 30px rgba(255,64,129,0.12), 0 20px 60px rgba(0,0,0,0.6)}
-      .boot-sub{color:rgba(255,255,255,0.72);font-size:14px;opacity:0;transform:translateY(6px);animation:bootLogo 900ms cubic-bezier(.2,.9,.2,1) forwards .25s}
-      /* modern circular spinner */
-      .boot-ring{display:flex;align-items:center;justify-content:center;margin-top:12px}
-      .spinner{width:64px;height:64px;display:block}
-      .spinner .path{stroke:#ff4081;stroke-linecap:round;stroke-dasharray:89,200;stroke-dashoffset:0;animation:dash 1.4s ease-in-out infinite, spin 2s linear infinite;transform-origin:50% 50%}
-      @keyframes spin{100%{transform:rotate(360deg)}}
-      @keyframes dash{0%{stroke-dasharray:1,200;stroke-dashoffset:0}50%{stroke-dasharray:100,200;stroke-dashoffset:-15px}100%{stroke-dasharray:89,200;stroke-dashoffset:-124px}}
-      @media (prefers-reduced-motion: reduce){
-        .spinner .path{animation:none}
-      }
-
-      @keyframes bootLogo{to{opacity:1;transform:translateY(0) scale(1)}}
-      @keyframes bootPulse{0%{transform:scale(.8);opacity:.6}50%{transform:scale(1.1);opacity:1}100%{transform:scale(.8);opacity:.6}}
-      @keyframes liquidSheen{0%{transform:skewX(-18deg) translateX(-100%)}50%{transform:skewX(-18deg) translateX(160%)}100%{transform:skewX(-18deg) translateX(160%)}}
+      /* Boot overlay styles moved to assets/boot.css */
 
       /* glassier CTA (liquid glass) */
       .cta{
@@ -116,37 +99,13 @@
     </style>
   </head>
   <body>
-    <div id="boot-overlay" class="boot-overlay" role="presentation" aria-hidden="false">
-      <div class="boot-inner">
-        <div class="boot-logo">Python Notes</div>
-        <div class="boot-sub">-Aditya</div>
-        <div class="boot-ring" aria-hidden="true">
-          <svg class="spinner" viewBox="0 0 50 50" role="img" aria-label="Loading">
-            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke="#ff4081" stroke-width="4" stroke-linecap="round"></circle>
-          </svg>
-        </div>
-      </div>
-    </div>
+    <!-- boot overlay injected by assets/boot.js -->
     <main class="hero" role="main">
       <div class="glow" aria-hidden="true"></div>
       <h1 class="title">Python Notes</h1>
       <p class="sub">-Aditya</p>
       <a class="cta" href="get-started.html">Get Started</a>
     </main>
-    <script>
-      (function(){
-        const overlay = document.getElementById('boot-overlay');
-        if(!overlay) return;
-        // Auto-hide after animation (2s), allow click to skip
-        const DURATION = 2000;
-        let hide = () => {
-          overlay.style.opacity = '0';
-          overlay.setAttribute('aria-hidden','true');
-          setTimeout(()=>overlay.remove(),400);
-        };
-        setTimeout(hide, DURATION);
-        overlay.addEventListener('click', hide, {passive:true});
-      })();
-    </script>
+    <script src="assets/boot.js"></script>
   </body>
 </html>
