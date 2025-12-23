@@ -1,6 +1,10 @@
 // Insert boot overlay markup and behavior
 (function(){
-  const DURATION = 2000; // ms
+  // Only show loader on initial page load, not on navigation
+  if (sessionStorage.getItem('qvznr_loaded')) {
+    return; // Already loaded in this session, skip overlay
+  }
+  
   function createOverlay(){
     const div = document.createElement('div');
     div.id = 'boot-overlay';
@@ -12,7 +16,7 @@
         const p = (location.pathname||'').split('/').pop() || 'index.html';
         if(p === '' || p === 'index.html') return 'Opening Home';
         if(p === 'home.html') return 'Opening Home';
-        if(p === 'get-started.html') return 'Opening Get Started';
+        
         // fallback to document.title or filename
         const title = (document && document.title) ? document.title.replace(/\s*—.*$/,'') : p;
         return 'Opening ' + title;
@@ -58,6 +62,7 @@
     let _savedBodyOverflow = document.body.style.overflow;
     let _savedBodyTouch = document.body.style.touchAction;
     document.body.appendChild(overlay);
+    sessionStorage.setItem('qvznr_loaded', 'true'); // Mark as loaded
     try{
       document.documentElement.style.overflow = 'hidden';
       document.body.style.overflow = 'hidden';
@@ -196,3 +201,6 @@
     document.addEventListener('touchstart', onLeave, {passive:true});
   })();
 })();
+
+
+
