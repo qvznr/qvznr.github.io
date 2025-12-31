@@ -148,21 +148,21 @@ document.addEventListener('DOMContentLoaded', function () {
     // Sort by speed (fastest first)
     results.sort((a, b) => b.speed - a.speed);
 
-    // Display results
+    // Display results with beautiful UI matching Sourceforge
     mirrorList.innerHTML = results.map((mirror, idx) => `
-      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
-        <div style="display:flex;align-items:center;gap:10px;flex:1;">
-          <span style="font-size:20px;">${mirror.icon}</span>
-          <div>
-            <div style="font-weight:700;color:#fff;font-size:14px;">${mirror.name}</div>
-            <div style="font-size:12px;color:rgba(255,255,255,0.6);">${mirror.domain}</div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(100,150,255,0.15);border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;transition:all 200ms ease;hover:{background:rgba(100,150,255,0.08);}">
+        <div style="display:flex;align-items:center;gap:14px;flex:1;min-width:0;">
+          <div style="font-size:24px;min-width:40px;text-align:center;">${mirror.icon}</div>
+          <div style="flex:1;">
+            <div style="font-weight:700;color:#fff;font-size:15px;margin-bottom:3px;">${mirror.name}</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.5);word-break:break-all;">${mirror.domain}</div>
           </div>
         </div>
-        <div style="text-align:right;min-width:150px;">
-          <div style="font-weight:700;color:#4ade80;font-size:14px;">${mirror.speed.toFixed(2)} MB/s</div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.5);">Peak: ${mirror.peak.toFixed(2)} MB/s</div>
+        <div style="text-align:right;min-width:180px;padding:0 12px;">
+          <div style="font-weight:700;color:#4ade80;font-size:15px;margin-bottom:3px;">${mirror.speed.toFixed(2)} MB/s</div>
+          <div style="font-size:12px;color:rgba(100,200,100,0.8);">Peak: ${mirror.peak.toFixed(2)} MB/s</div>
         </div>
-        <button class="cta" style="padding:8px 16px;font-size:13px;white-space:nowrap;" onclick="window.selectedMirror='${mirror.domain}';document.getElementById('fileUrl').value='https://${mirror.domain}/${fileUrl.split('sourceforge.net/')[1] || 'projects/file'}';document.getElementById('downloadBtn').click();">📥 Download</button>
+        <button class="cta" style="padding:10px 20px;font-size:13px;white-space:nowrap;background:linear-gradient(135deg, rgba(74,222,128,0.15), rgba(34,197,94,0.1));border-color:rgba(74,222,128,0.3);color:#4ade80;font-weight:600;" onclick="window.selectedMirror='${mirror.domain}';document.getElementById('fileUrl').value='https://${mirror.domain}/${fileUrl.split('sourceforge.net/')[1] || 'projects/file'}';document.getElementById('downloadBtn').click();">📥 Download</button>
       </div>
     `).join('');
 

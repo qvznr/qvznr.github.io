@@ -36,19 +36,19 @@
         </div>
 
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <button id="testMirrorsBtn" class="cta" type="button" style="flex:1;min-width:150px;background:linear-gradient(135deg, rgba(0,122,255,0.15), rgba(100,200,255,0.1));border-color:rgba(0,122,255,0.3);">Test Mirrors</button>
-          <button id="downloadBtn" class="cta" type="submit" style="flex:1;min-width:150px;">Download</button>
-          <button id="openBtn" class="cta" type="button" style="flex:1;min-width:150px;">Open URL</button>
+          <button id="testMirrorsBtn" class="cta" type="button" style="flex:1;min-width:150px;background:linear-gradient(135deg, rgba(99,102,241,0.15), rgba(59,130,246,0.1));border-color:rgba(99,102,241,0.3);color:#e0e7ff;font-weight:700;">🚀 Test Mirrors</button>
+          <button id="downloadBtn" class="cta" type="submit" style="flex:1;min-width:150px;">📥 Download</button>
+          <button id="openBtn" class="cta" type="button" style="flex:1;min-width:150px;">🔗 Open URL</button>
         </div>
       </form>
 
       <!-- Mirror Results Section -->
-      <div id="mirrorResults" style="display:none;margin-top:28px;padding:20px;background:rgba(0,122,255,0.05);border:1px solid rgba(0,122,255,0.2);border-radius:12px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-          <h3 style="margin:0;font-size:16px;font-weight:700;color:#fff;">🚀 Mirror Speed Results (Fastest First)</h3>
-          <button id="closeMirrors" style="background:none;border:none;color:rgba(255,255,255,0.6);font-size:20px;cursor:pointer;">×</button>
+      <div id="mirrorResults" style="display:none;margin-top:28px;padding:0;background:linear-gradient(135deg, rgba(99,102,241,0.08), rgba(59,130,246,0.05));border:1px solid rgba(99,102,241,0.2);border-radius:14px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.3);">
+        <div style="background:linear-gradient(90deg, rgba(99,102,241,0.3), rgba(59,130,246,0.2));padding:20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(99,102,241,0.2);">
+          <h3 style="margin:0;font-size:18px;font-weight:900;color:#fff;letter-spacing:-0.5px;">🚀 Mirror Speed Results</h3>
+          <button id="closeMirrors" style="background:linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);font-size:24px;cursor:pointer;width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:all 200ms ease;font-weight:300;line-height:1;">×</button>
         </div>
-        <div id="mirrorList" style="display:grid;gap:12px;"></div>
+        <div id="mirrorList" style="display:grid;gap:12px;padding:20px;"></div>
       </div>
 
       <div id="status" style="margin-top:20px;color:rgba(255,255,255,0.78);padding:12px;background:rgba(255,255,255,0.02);border-radius:8px;border-left:3px solid rgba(255,111,163,0.3);display:none;"></div>
