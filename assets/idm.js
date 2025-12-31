@@ -61,3 +61,32 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+// Global helper so device pages can trigger IDM-styled downloads directly
+window.startIDMDownload = function (fileUrl, suggestedName) {
+  if (!fileUrl) return;
+
+  const allowedDomain = 'sourceforge.net';
+  try {
+    const urlObj = new URL(fileUrl);
+    if (!urlObj.hostname.includes(allowedDomain) || !urlObj.pathname.includes('coloxy')) {
+      alert('Downloads are only allowed from https://sourceforge.net/projects/coloxy');
+      return;
+    }
+  } catch (err) {
+    alert('Invalid download URL');
+    return;
+  }
+
+  // Prefer the provided filename, else derive from URL
+  const filename = suggestedName || decodeURIComponent(fileUrl.split('/').pop() || 'download.bin');
+
+  // Open in new tab to let SourceForge handle the redirect, which works with IDM capture
+  const a = document.createElement('a');
+  a.href = fileUrl;
+  a.download = filename;
+  a.target = '_blank';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+};
