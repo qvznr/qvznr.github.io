@@ -207,8 +207,8 @@ body::after{
   line-height:1.1;
   animation:floatY 8s ease-in-out infinite;
   will-change:transform;
-  white-space:normal;
-  word-spacing:9999px;
+  white-space:nowrap;
+  word-spacing:normal;
 }
 
 /* Subtitle */
@@ -593,11 +593,11 @@ body.light-mode .rom-card p{color:rgba(15,17,21,0.8)}
   border-bottom:1px solid rgba(255,255,255,0.08);
 }
 .header-inner{max-width:1200px;margin:0 auto;position:relative;padding:0 18px;height:52px;display:flex;align-items:center;gap:14px;justify-content:space-between}
-.logo{font-family:Orbitron,Inter,system-ui,Segoe UI,Roboto,Arial;font-weight:900;color:#ff6fa3;font-size:18px;letter-spacing:0.6px;white-space:nowrap;display:none}
+.logo{font-family:Orbitron,Inter,system-ui,Segoe UI,Roboto,Arial;font-weight:900;color:#ff6fa3;font-size:18px;letter-spacing:0.6px;white-space:nowrap;position:absolute;left:18px}
 .site-nav{display:flex;gap:18px;align-items:center;justify-content:center;flex:1}
 .nav-link{color:rgba(255,255,255,0.9);text-decoration:none;font-weight:700;padding:8px 12px;border-radius:10px;transition:background .18s,transform .12s;font-size:14px}
 .nav-link:hover{background:rgba(255,111,163,0.08);transform:translateY(-2px)}
-.nav-link.active{background:rgba(255,111,163,0.15);border-bottom:2px solid #00d9ff;padding-bottom:6px}
+.nav-link.active{background:rgba(255,111,163,0.15);border-bottom:2px solid #00d9ff;padding-bottom:6px;box-shadow:0 0 16px rgba(0,217,255,0.35), inset 0 0 12px rgba(0,217,255,0.15)}
 
 .header-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
 .theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:#fff;cursor:pointer;transition:all .2s ease}
@@ -614,8 +614,9 @@ body.light-mode .rom-card p{color:rgba(15,17,21,0.8)}
 @media (max-width:768px){
   .site-header{padding:10px 0}
   .header-inner{padding:0 16px}
-  .logo{font-size:16px}
-  .menu-toggle{display:flex}
+  .logo{position:static;font-size:16px;margin:0 auto}
+  .menu-toggle{display:flex;position:absolute;left:16px}
+  .site-nav{flex:0}
   
   .site-nav{
     position:fixed;
