@@ -192,9 +192,25 @@ document.addEventListener('DOMContentLoaded', function () {
         e.stopPropagation();
         status.style.display = 'none'; // Hide any previous messages
         mirrorResults.style.display = 'none'; // Close mirror results
-        const mirrorDomain = this.getAttribute('data-mirror');
+        const mirrorName = this.getAttribute('data-mirror');
         const originalUrl = this.getAttribute('data-url');
-        const newUrl = `https://${mirrorDomain}/${originalUrl.split('sourceforge.net/')[1] || 'projects/file'}`;
+        
+        // Extract mirror short name (e.g., "phoenixnap" from "phoenixnap.dl.sourceforge.net")
+        const mirrorShortName = mirrorName.split('.')[0]; // Get first part before the dot
+        
+        // Construct proper Sourceforge mirror URL with ?use_mirror parameter
+        let newUrl;
+        if (originalUrl.includes('sourceforge.net')) {
+          // Add or update the use_mirror parameter
+          if (originalUrl.includes('?')) {
+            newUrl = originalUrl + `&use_mirror=${mirrorShortName}`;
+          } else {
+            newUrl = originalUrl + `?use_mirror=${mirrorShortName}`;
+          }
+        } else {
+          newUrl = originalUrl;
+        }
+        
         urlIn.value = newUrl;
         // Trigger download after a small delay
         setTimeout(() => {
