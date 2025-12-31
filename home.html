@@ -14,19 +14,41 @@
   <body class="home-page">
     <header class="site-header">
       <div class="header-inner">
-        <div class="logo">ColorOS Ports</div>
+        <div class="logo-container">
+          <svg class="logo-icon" width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 10L80 30V70L50 90L20 70V30L50 10Z" stroke="url(#gradient1)" stroke-width="4" fill="url(#gradient2)"/>
+            <defs>
+              <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#00ff87;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#60efff;stop-opacity:1" />
+              </linearGradient>
+              <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#00ff87;stop-opacity:0.1" />
+                <stop offset="100%" style="stop-color:#60efff;stop-opacity:0.05" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="logo">ColOxy</span>
+        </div>
         <button class="menu-toggle" aria-label="Toggle menu">
           <span></span>
           <span></span>
           <span></span>
         </button>
         <nav class="site-nav">
-          <a href="home.html" class="nav-link">Home</a>
-          <a href="roms.html" class="nav-link">Roms</a>
+          <a href="home.html" class="nav-link active">Home</a>
+          <a href="roms.html" class="nav-link">ROMs</a>
+          <a href="installation.html" class="nav-link">Installation Guide</a>
           <a href="devices.html" class="nav-link">Devices</a>
-          <a href="installation.html" class="nav-link">Installation Guide</a></nav>
+        </nav>
         <div class="header-actions">
-          <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
+          <button class="user-icon" aria-label="User account">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <circle cx="12" cy="10" r="3"/>
+              <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/>
+            </svg>
+          </button>
         </div>
       </div>
     </header>
