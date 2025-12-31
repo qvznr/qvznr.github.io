@@ -134,12 +134,36 @@
       
       @media (max-width: 768px) {
         .page-title {
-          font-size: 2rem;
+          font-size: 2.2rem;
+          margin-bottom: 0.8rem;
+        }
+        
+        .page-subtitle {
+          font-size: 1rem;
+          margin-bottom: 40px;
+          padding: 0 10px;
+        }
+        
+        .devices-container {
+          padding: 80px 16px 60px;
         }
         
         .devices-grid {
-          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+          grid-template-columns: 1fr;
           gap: 20px;
+        }
+        
+        .device-card {
+          padding: 24px;
+        }
+        
+        .device-image {
+          height: 220px;
+          max-width: 180px;
+        }
+        
+        .device-name {
+          font-size: 1.3rem;
         }
       }
     </style>
@@ -148,10 +172,16 @@
     <header class="site-header">
       <div class="header-inner">
         <div class="logo">ColorOS Ports</div>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <nav class="site-nav">
           <a href="home.html" class="nav-link">Home</a>
           <a href="roms.html" class="nav-link">Roms</a>
-          <a href="installation.html" class="nav-link">Installation Guide</a>
+          <a href="devices.html" class="nav-link">Devices</a>
+          <a href="installation.html" class="nav-link">Installation</a>
           <a href="idm.html" class="nav-link">IDM</a>
         </nav>
       </div>
@@ -197,5 +227,25 @@
     </main>
 
     <script src="assets/boot.js?v=2"></script>
+    <script>
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const siteNav = document.querySelector('.site-nav');
+      if(menuToggle) {
+        menuToggle.addEventListener('click', function() {
+          this.classList.toggle('active');
+          siteNav.classList.toggle('active');
+          document.body.style.overflow = siteNav.classList.contains('active') ? 'hidden' : '';
+        });
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            siteNav.classList.remove('active');
+            document.body.style.overflow = '';
+          });
+        });
+      }
+    </script>
   </body>
 </html>

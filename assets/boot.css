@@ -468,11 +468,19 @@ body::after{
 
 /* prevent scrolling on home page for small/touch devices (keeps visuals intact) */
 @media (max-width:720px){
-  .home-noscroll, .home-noscroll body{ overflow:hidden !important; touch-action:none !important; }
-  .home-noscroll html, .home-noscroll{ height:100vh; }
-  /* also support explicit home-page class on body to always prevent mobile scroll */
-  .home-page, .home-page body, .home-page html{ overflow:hidden !important; touch-action:none !important; height:100vh !important; }
-  .home-page .hero{ min-height:100vh; overflow:hidden; }
+  /* Allow scrolling on mobile to view all content */
+  .home-page, .home-page body, .home-page html{ 
+    overflow-y: auto !important; 
+    overflow-x: hidden !important;
+    touch-action: pan-y !important; 
+    height: auto !important;
+    min-height: 100vh !important;
+  }
+  .home-page .hero{ 
+    min-height: 100vh; 
+    overflow: visible;
+    padding-bottom: 40px;
+  }
 }
 
 /* Mobile: keep headings centered on phones */
@@ -530,18 +538,67 @@ body::after{
   left:0;right:0;top:0;
   z-index:1200;
   padding:12px 8px;
-  background:linear-gradient(180deg, rgba(2,3,6,0.28), rgba(2,3,6,0.12));
-  backdrop-filter: blur(6px) saturate(120%);
+  background:linear-gradient(180deg, rgba(2,3,6,0.95), rgba(2,3,6,0.85));
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
 }
-.header-inner{max-width:1200px;margin:0 auto;position:relative;padding:0 18px;height:48px;display:flex;align-items:center}
-.logo{position:absolute;left:18px;font-family:Orbitron,Inter,system-ui,Segoe UI,Roboto,Arial;font-weight:900;color:#ff6fa3;font-size:18px;letter-spacing:0.6px}
-.site-nav{margin:0 auto;display:flex;gap:20px;align-items:center}
-.nav-link{color:rgba(255,255,255,0.86);text-decoration:none;font-weight:700;padding:6px 10px;border-radius:8px;transition:background .18s,transform .12s}
+.header-inner{max-width:1200px;margin:0 auto;position:relative;padding:0 18px;height:48px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:Orbitron,Inter,system-ui,Segoe UI,Roboto,Arial;font-weight:900;color:#ff6fa3;font-size:18px;letter-spacing:0.6px}
+.site-nav{display:flex;gap:20px;align-items:center;margin-left:auto}
+.nav-link{color:rgba(255,255,255,0.86);text-decoration:none;font-weight:700;padding:6px 10px;border-radius:8px;transition:background .18s,transform .12s;font-size:14px}
 .nav-link:hover{background:rgba(255,111,163,0.06);transform:translateY(-2px)}
 
-/* small screens: compress header */
-@media (max-width:640px){
-  .logo{left:12px;font-size:15px}
-  .site-nav{gap:10px}
+/* Hamburger menu */
+.menu-toggle{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:8px;z-index:1201}
+.menu-toggle span{display:block;width:24px;height:2px;background:#ff6fa3;border-radius:2px;transition:all .3s ease}
+.menu-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px, 5px)}
+.menu-toggle.active span:nth-child(2){opacity:0}
+.menu-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(7px, -6px)}
+
+/* Mobile responsive header */
+@media (max-width:768px){
+  .site-header{padding:10px 0}
+  .header-inner{padding:0 16px}
+  .logo{font-size:16px}
+  .menu-toggle{display:flex}
+  
+  .site-nav{
+    position:fixed;
+    top:0;
+    right:-100%;
+    width:70%;
+    max-width:300px;
+    height:100vh;
+    background:linear-gradient(180deg, rgba(10,10,15,0.98), rgba(26,10,46,0.98));
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    flex-direction:column;
+    gap:0;
+    padding:80px 20px 40px;
+    box-shadow:-10px 0 40px rgba(0,0,0,0.5);
+    transition:right .3s ease;
+    overflow-y:auto;
+    border-left:1px solid rgba(255,111,163,0.1);
+  }
+  
+  .site-nav.active{right:0}
+  
+  .nav-link{
+    width:100%;
+    padding:16px 20px;
+    font-size:16px;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    border-radius:0;
+  }
+  
+  .nav-link:hover{
+    background:rgba(255,111,163,0.1);
+    transform:translateX(5px);
+  }
+}
+
+/* Tablet screens */
+@media (max-width:900px) and (min-width:769px){
+  .site-nav{gap:12px}
   .nav-link{font-size:13px;padding:6px 8px}
 }
