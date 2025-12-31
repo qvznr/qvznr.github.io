@@ -215,6 +215,20 @@ window.startIDMDownload = function (fileUrl, suggestedName) {
   // Prefer the provided filename, else derive from URL
   const filename = suggestedName || decodeURIComponent(fileUrl.split('/').pop() || 'download.bin');
 
-  // Redirect to IDM page with URL and filename as query params
-  window.location.href = `idm.html?url=${encodeURIComponent(fileUrl)}&name=${encodeURIComponent(filename)}`;
+  // Convert SourceForge URL to direct mirror URL
+  // From: https://sourceforge.net/projects/coloxy/files/OxygenOS%2016/16.0.2.400/OnePlus%209%20Pro.zip/download
+  // To: https://phoenixnap.dl.sourceforge.net/projects/coloxy/files/OxygenOS%2016/16.0.2.400/OnePlus%209%20Pro.zip
+  const urlObj = new URL(fileUrl);
+  let path = urlObj.pathname;
+  
+  // Remove /download at the end if present
+  if (path.endsWith('/download')) {
+    path = path.slice(0, -9); // Remove '/download'
+  }
+  
+  // Use PhoenixNAP mirror directly
+  const mirrorUrl = 'https://phoenixnap.dl.sourceforge.net' + path;
+  
+  // Redirect to IDM page with the mirror URL
+  window.location.href = `idm.html?url=${encodeURIComponent(mirrorUrl)}&name=${encodeURIComponent(filename)}`;
 };
