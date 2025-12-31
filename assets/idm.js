@@ -62,25 +62,24 @@ async function downloadWithMirrorTesting(fileUrl, filename, statusEl) {
   statusEl.style.color = '#ff6fa3';
 
   try {
-    // Common SourceForge mirrors
+    // Common SourceForge mirrors (ordered by typical reliability/speed)
     const mirrors = [
-      'https://downloads.sourceforge.net',
-      'https://cfhcable.dl.sourceforge.net',
-      'https://deac-riga.dl.sourceforge.net',
-      'https://iweb.dl.sourceforge.net',
       'https://phoenixnap.dl.sourceforge.net',
+      'https://cfhcable.dl.sourceforge.net',
       'https://versaweb.dl.sourceforge.net',
-      'https://managedway.dl.sourceforge.net'
+      'https://iweb.dl.sourceforge.net',
+      'https://deac-riga.dl.sourceforge.net',
+      'https://managedway.dl.sourceforge.net',
+      'https://downloads.sourceforge.net'
     ];
 
     // Extract the path after sourceforge.net
     const urlObj = new URL(fileUrl);
     const path = urlObj.pathname;
 
-    // Test each mirror by timing a HEAD request (no download needed)
+    // Test each mirror with no-cors fetch timing
     statusEl.textContent = `Testing ${mirrors.length} mirrors...`;
     const results = [];
-    const testSize = 2 * 1024 * 1024; // 2MB for partial test
 
     for (let i = 0; i < mirrors.length; i++) {
       const mirror = mirrors[i];
@@ -92,42 +91,42 @@ async function downloadWithMirrorTesting(fileUrl, filename, statusEl) {
       try {
         const startTime = performance.now();
         
-        // Use image loading trick to test speed (no CORS issues)
-        const speedTest = await new Promise((resolve, reject) => {
-          const img = new Image();
-          const timeout = setTimeout(() => {
-            reject(new Error('timeout'));
-          }, 3000);
-          
-          img.onload = () => {
-            clearTimeout(timeout);
-            const endTime = performance.now();
-            resolve(endTime - startTime);
-          };
-          
-          img.onerror = () => {
-            clearTimeout(timeout);
-            reject(new Error('failed'));
-          };
-          
-          // Add timestamp to prevent caching
-          img.src = testUrl + '?t=' + Date.now();
+        // Use fetch with no-cors mode to test connectivity
+        await fetch(testUrl, { 
+          method: 'HEAD',
+          mode: 'no-cors',
+          cache: 'no-cache'
         });
         
-        const duration = speedTest;
-        // Lower duration = faster mirror
+        const endTime = performance.now();
+        const duration = endTime - startTime;
+        
         results.push({ mirror, testUrl, duration, mirrorName });
-        console.log(`Mirror ${mirrorName}: ${duration.toFixed(0)}ms`);
+        console.log(`Mirror ${mirrorName}: ${duration.toFixed(0)}ms response time`);
       } catch (err) {
         console.warn(`Mirror ${mirrorName} failed:`, err.message);
       }
     }
 
     if (results.length === 0) {
-      // Fallback to original URL
-      statusEl.textContent = 'Mirror testing failed. Opening original URL...';
+      // Fallback: use phoenixnap mirror (usually fastest)
+      const fallbackMirror = 'https://phoenixnap.dl.sourceforge.net';
+      const fallbackUrl = fallbackMirror + path;
+      statusEl.textContent = 'Using default fast mirror (PhoenixNAP)...';
       statusEl.style.color = '#ff6fa3';
-      setTimeout(() => window.open(fileUrl, '_blank'), 1000);
+      
+      setTimeout(() => {
+        const a = document.createElement('a');
+        a.href = fallbackUrl;
+        a.download = filename;
+        a.target = '_blank';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        
+        statusEl.textContent = `Downloading from PhoenixNAP mirror`;
+        statusEl.style.color = '#4ade80';
+      }, 500);
       return;
     }
 
@@ -148,15 +147,32 @@ async function downloadWithMirrorTesting(fileUrl, filename, statusEl) {
       a.click();
       a.remove();
       
-      statusEl.textContent = `Downloading from ${fastest.mirrorName} (fastest mirror - ${fastest.duration.toFixed(0)}ms)`;
+      statusEl.textContent = `Downloading from ${fastest.mirrorName} (fastest - ${fastest.duration.toFixed(0)}ms)`;
       statusEl.style.color = '#4ade80';
-    }, 800);
+    }, 500);
 
   } catch(err) {
     console.error(err);
-    statusEl.textContent = 'Error: ' + err.message + '. Opening original URL...';
-    statusEl.style.color = '#ff6fa3';
-    setTimeout(() => window.open(fileUrl, '_blank'), 1000);
+    statusEl.textContent = 'Starting download...';
+    statusEl.style.color = '#4ade80';
+    
+    // Use default fast mirror as ultimate fallback
+    const urlObj = new URL(fileUrl);
+    const path = urlObj.pathname;
+    const fallbackUrl = 'https://phoenixnap.dl.sourceforge.net' + path;
+    
+    setTimeout(() => {
+      const a = document.createElement('a');
+      a.href = fallbackUrl;
+      a.download = filename;
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      
+      statusEl.textContent = 'Download started';
+      statusEl.style.color = '#4ade80';
+    }, 500);
   }
 }
 
