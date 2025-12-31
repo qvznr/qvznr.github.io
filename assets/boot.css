@@ -603,32 +603,24 @@ body.light-mode .rom-card p{color:rgba(15,17,21,0.8)}
   justify-content:space-between;
 }
 
-/* Logo container with icon */
+/* Logo container */
 .logo-container{
   display:flex;
   align-items:center;
-  gap:12px;
   z-index:2;
-}
-
-.logo-icon{
-  width:32px;
-  height:32px;
-  animation:logoFloat 3s ease-in-out infinite;
-}
-
-@keyframes logoFloat{
-  0%,100%{transform:translateY(0px)}
-  50%{transform:translateY(-4px)}
 }
 
 .logo{
   font-family:Orbitron,Inter,system-ui,Segoe UI,Roboto,Arial;
-  font-weight:700;
+  font-weight:900;
   color:#fff;
-  font-size:22px;
-  letter-spacing:1px;
+  font-size:26px;
+  letter-spacing:1.2px;
   white-space:nowrap;
+  background:linear-gradient(135deg, #00ff87 0%, #60efff 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
 }
 
 /* Navigation */
