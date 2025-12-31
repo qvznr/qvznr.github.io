@@ -151,14 +151,8 @@ async function downloadWithMirrorTesting(fileUrl, filename, statusEl) {
       statusEl.textContent = `Downloading from ${fastest.mirror} (${fastest.speed.toFixed(2)} MB/s)...`;
       statusEl.style.color = '#4ade80';
       
-      // Open in new tab to trigger browser download
-      const a = document.createElement('a');
-      a.href = fastest.url;
-      a.download = filename;
-      a.target = '_blank';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
+      // Use direct mirror URL without SourceForge redirect
+      window.location.href = fastest.url;
       
       statusEl.textContent = `Download started from ${fastest.mirror} (${fastest.speed.toFixed(2)} MB/s) - Check browser downloads`;
       statusEl.style.color = '#4ade80';
@@ -166,21 +160,16 @@ async function downloadWithMirrorTesting(fileUrl, filename, statusEl) {
 
   } catch(err) {
     console.error(err);
-    // Ultimate fallback
+    // Ultimate fallback - use PhoenixNAP direct mirror
     const urlObj = new URL(fileUrl);
-    const fallbackUrl = 'https://phoenixnap.dl.sourceforge.net' + urlObj.pathname;
+    const path = urlObj.pathname;
+    const fallbackUrl = 'https://phoenixnap.dl.sourceforge.net' + path;
     
     statusEl.textContent = 'Starting download...';
     statusEl.style.color = '#4ade80';
     
     setTimeout(() => {
-      const a = document.createElement('a');
-      a.href = fallbackUrl;
-      a.download = filename;
-      a.target = '_blank';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
+      window.location.href = fallbackUrl;
       
       statusEl.textContent = 'Download started - Check browser downloads';
       statusEl.style.color = '#4ade80';
@@ -194,14 +183,8 @@ async function downloadWithProgress(url, filename, statusEl) {
     statusEl.textContent = 'Starting download...';
     statusEl.style.color = '#4ade80';
     
-    // Open in new tab - most reliable for SourceForge
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.target = '_blank';
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+    // Use direct window.location for most reliable download
+    window.location.href = url;
     
     statusEl.textContent = 'Download started - Check your browser downloads';
     statusEl.style.color = '#4ade80';
