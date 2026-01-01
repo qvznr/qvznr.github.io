@@ -813,17 +813,17 @@ body.light-mode .rom-card p{color:rgba(15,17,21,0.8)}
   .header-inner{
     padding:0 20px;
     height:60px;
+    justify-content:center;
   }
   
   .logo{
     font-size:18px;
+    text-align:center;
   }
   
   .logo-container{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%, -50%);
+    position:static;
+    transform:none;
     z-index:10;
   }
   
