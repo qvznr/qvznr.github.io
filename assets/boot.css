@@ -872,7 +872,12 @@ body.light-mode .rom-card p{color:rgba(15,17,21,0.8)}
     transform:translateX(5px);
   }
 
-  .header-actions{margin-left:0}
+  .header-actions{
+    position:fixed;
+    right:20px;
+    top:15px;
+    z-index:1201;
+  }
 }
 
 /* Tablet screens */
