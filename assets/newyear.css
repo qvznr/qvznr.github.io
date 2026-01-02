@@ -52,6 +52,7 @@
   pointer-events:none !important;
   z-index:100;
   overflow:hidden;
+  contain:layout style paint;
 }
 
 .confetti{
@@ -63,6 +64,7 @@
   opacity:0;
   animation:confettiFall 4s linear forwards;
   transform-origin:center;
+  will-change:transform, opacity;
 }
 
 .confetti:nth-child(odd){background:#ff69b4}
@@ -90,6 +92,7 @@
   pointer-events:none !important;
   z-index:99;
   overflow:hidden;
+  contain:layout style paint;
 }
 
 .firework{
@@ -98,6 +101,7 @@
   height:4px;
   border-radius:50%;
   animation:fireworkLaunch 1.5s ease-out forwards;
+  will-change:transform, opacity;
 }
 
 .firework::before,
@@ -146,6 +150,7 @@
   inset:0;
   pointer-events:none !important;
   z-index:98;
+  contain:layout style paint;
   overflow:hidden;
 }
 
@@ -157,6 +162,7 @@
   border-radius:50%;
   animation:sparkleTwinkle 2s ease-in-out infinite;
   opacity:0;
+  will-change:transform, opacity;
 }
 
 .sparkle::before,
@@ -199,6 +205,7 @@
   text-shadow:0 0 10px rgba(255,255,255,0.8);
   pointer-events:none;
   user-select:none;
+  will-change:transform, opacity;
 }
 
 @keyframes snowfall{

@@ -6,10 +6,10 @@
 
   // Configuration
   const CONFIG = {
-    confettiCount: 20,
-    fireworksInterval: 5000,
-    sparkleCount: 10,
-    snowflakeCount: 8,
+    confettiCount: 10,
+    fireworksInterval: 8000,
+    sparkleCount: 5,
+    snowflakeCount: 4,
     targetDate: new Date('2026-01-01T00:00:00').getTime()
   };
 
@@ -137,12 +137,12 @@
       setTimeout(createConfettiPiece, Math.random() * 2000);
     }
 
-    // Continue creating confetti (less frequently)
+    // Continue creating confetti (very infrequently)
     setInterval(() => {
-      if (Math.random() > 0.85) {
+      if (Math.random() > 0.92) {
         createConfettiPiece();
       }
-    }, 500);
+    }, 1200);
   }
 
   // Fireworks animation
@@ -174,7 +174,7 @@
     }
 
     function createExplosion(x, y, color) {
-      const particleCount = 30;
+      const particleCount = 15;
       for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
@@ -226,12 +226,12 @@
       setTimeout(() => sparkle.remove(), 4000);
     }
 
-    // Create sparkles periodically (less frequently)
+    // Create sparkles periodically (very infrequently)
     setInterval(() => {
-      if (Math.random() > 0.9) {
+      if (Math.random() > 0.95) {
         createSparkle();
       }
-    }, 800);
+    }, 1500);
   }
 
   // Snowfall animation
@@ -257,10 +257,10 @@
     }
 
     setInterval(() => {
-      if (Math.random() > 0.9) {
+      if (Math.random() > 0.95) {
         createSnowflake();
       }
-    }, 1000);
+    }, 2000);
   }
 
   // Trigger celebration effect
@@ -384,33 +384,32 @@
       });
     });
 
-    // Parallax effect on scroll (only on home page)
+    // Parallax effect on scroll (only on home page, optimized)
     if (document.querySelector('.hero')) {
       let ticking = false;
-      let lastScrollY = window.scrollY;
 
       window.addEventListener('scroll', () => {
-        lastScrollY = window.scrollY;
         if (!ticking) {
           window.requestAnimationFrame(() => {
-            updateParallax(lastScrollY);
+            updateParallax();
             ticking = false;
           });
           ticking = true;
         }
       }, { passive: true });
 
-      function updateParallax(scrollY) {
+      function updateParallax() {
         try {
+          const scrollY = window.scrollY;
           const glow = document.querySelector('.glow');
           if (glow) {
-            glow.style.transform = `translateX(-50%) translateY(${scrollY * 0.3}px)`;
+            glow.style.transform = `translate3d(-50%, ${scrollY * 0.3}px, 0)`;
           }
 
           const heroElements = document.querySelectorAll('.hero .title, .hero .sub, .hero .cta-row');
           heroElements.forEach((el, index) => {
             if (el) {
-              el.style.transform = `translateY(${scrollY * (0.1 * (index + 1))}px)`;
+              el.style.transform = `translate3d(0, ${scrollY * (0.05 * (index + 1))}px, 0)`;
             }
           });
         } catch (err) {
