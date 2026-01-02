@@ -248,7 +248,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
   chatWidget.innerHTML = `
     <button class="ai-chat-button" aria-label="Open AI Assistant">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+        <path d="M12 2C10.89 2 10 2.9 10 4V4.29C7.03 5.17 5 7.9 5 11v6l-2 2v1h18v-1l-2-2v-6c0-3.1-2.03-5.83-5-6.71V4c0-1.1-.89-2-2-2zm0 18c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2z"/>
+        <circle cx="12" cy="12" r="1.5" opacity="0.9"/>
+        <circle cx="8" cy="10" r="1" opacity="0.7"/>
+        <circle cx="16" cy="10" r="1" opacity="0.7"/>
+        <path d="M12 6c-2.2 0-4 1.8-4 4h1c0-1.66 1.34-3 3-3s3 1.34 3 3h1c0-2.2-1.8-4-4-4z" opacity="0.6"/>
       </svg>
     </button>
     <div class="ai-chat-window">
@@ -301,52 +305,71 @@ document.addEventListener('DOMContentLoaded', ()=>{
     chatWindow.classList.remove('active');
   });
 
-  function addMessage(text, isUser = false) {
+  function addMessage(text, isUser = false, suggestions = []) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `ai-message ${isUser ? 'user' : 'ai'}`;
+    
+    let suggestionsHTML = '';
+    if (suggestions && suggestions.length > 0 && !isUser) {
+      suggestionsHTML = '<div class="ai-suggestions">' +
+        suggestions.map(s => `<button class="ai-suggestion-btn" data-suggestion="${s}">${s}</button>`).join('') +
+        '</div>';
+    }
+    
     messageDiv.innerHTML = `
       <div class="ai-message-avatar">${isUser ? '👤' : '🤖'}</div>
-      <div class="ai-message-content">${text}</div>
+      <div class="ai-message-content">${text}${suggestionsHTML}</div>
     `;
     chatMessages.appendChild(messageDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
+    
+    // Add click handlers for suggestion buttons
+    if (!isUser) {
+      messageDiv.querySelectorAll('.ai-suggestion-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const suggestionText = btn.getAttribute('data-suggestion');
+          chatInput.value = suggestionText;
+          sendMessage();
+        });
+      });
+    }
   }
 
   function getBotResponse(userMessage) {
+    // Use the advanced AI if available
+    if (window.ColorOSAI && window.ColorOSAI.chat) {
+      const response = window.ColorOSAI.chat(userMessage);
+      return response;
+    }
+    
+    // Fallback to basic responses if AI not loaded
     const msg = userMessage.toLowerCase();
     
-    // Installation related
     if (msg.includes('install') || msg.includes('flash') || msg.includes('how to')) {
-      return 'To install ColorOS/OxygenOS ROM:<br>1. Unlock bootloader<br>2. Boot into OrangeFox recovery<br>3. Wipe System, Data, Cache<br>4. Flash the ROM ZIP<br>5. Reboot<br><br>Check our <a href="installation.html" style="color:#00d9ff;">Installation Guide</a> for detailed steps!';
+      return {
+        text: 'To install ColorOS/OxygenOS ROM:<br>1. Unlock bootloader<br>2. Boot into OrangeFox recovery<br>3. Wipe System, Data, Cache<br>4. Flash the ROM ZIP<br>5. Reboot<br><br>Check our <a href="installation.html" style="color:#00d9ff;">Installation Guide</a> for detailed steps!',
+        suggestions: ['Supported devices', 'Download ROM']
+      };
     }
     
-    // Device compatibility
-    if (msg.includes('device') || msg.includes('support') || msg.includes('compatible')) {
-      return 'We support OnePlus 8, 8 Pro, 9, and 9 Pro devices. Check the <a href="devices.html" style="color:#00d9ff;">Devices page</a> for more details!';
+    if (msg.includes('device') || msg.includes('support')) {
+      return {
+        text: 'We support OnePlus 8, 8 Pro, 9, and 9 Pro devices. Check the <a href="devices.html" style="color:#00d9ff;">Devices page</a> for more details!',
+        suggestions: ['Installation guide', 'Download ROM']
+      };
     }
     
-    // ROM download
-    if (msg.includes('download') || msg.includes('rom') || msg.includes('link')) {
-      return 'You can download ColorOS 16 and OxygenOS 16 ROMs from our <a href="roms.html" style="color:#00d9ff;">ROMs page</a>. Choose your device and preferred ROM version!';
+    if (msg.includes('download') || msg.includes('rom')) {
+      return {
+        text: 'You can download ColorOS 16 and OxygenOS 16 ROMs from our <a href="roms.html" style="color:#00d9ff;">ROMs page</a>. Choose your device and preferred ROM version!',
+        suggestions: ['Installation guide', 'Device compatibility']
+      };
     }
     
-    // OnePlus 13
-    if (msg.includes('oneplus 13') || msg.includes('op13') || msg.includes('13')) {
-      return 'OnePlus 13 is shown on our site as a preview, but we don\'t currently support it for porting. Stay tuned for future updates!';
-    }
-    
-    // Recovery
-    if (msg.includes('recovery') || msg.includes('orangefox') || msg.includes('twrp')) {
-      return 'We recommend using OrangeFox recovery for flashing ColorOS/OxygenOS ROMs. Download it from our installation guide and boot using: <code>fastboot boot orangefox.img</code>';
-    }
-    
-    // Bootloader
-    if (msg.includes('bootloader') || msg.includes('unlock')) {
-      return 'You need an unlocked bootloader to install custom ROMs. This process varies by device. Make sure to backup your data before unlocking as it will wipe your device!';
-    }
-    
-    // Default response
-    return 'I can help you with ROM installation, device compatibility, downloads, and general questions about ColorOS/OxygenOS ports. What would you like to know?';
+    return {
+      text: 'I can help you with ROM installation, device compatibility, downloads, and general questions. What would you like to know?',
+      suggestions: ['Installation guide', 'Supported devices', 'Download ROM']
+    };
   }
 
   function sendMessage() {
@@ -357,11 +380,26 @@ document.addEventListener('DOMContentLoaded', ()=>{
     addMessage(message, true);
     chatInput.value = '';
 
-    // Simulate typing delay
+    // Show typing indicator
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'ai-message ai typing-indicator';
+    typingDiv.innerHTML = `
+      <div class="ai-message-avatar">🤖</div>
+      <div class="ai-message-content">
+        <div class="typing-dots">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    `;
+    chatMessages.appendChild(typingDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    // Simulate smart processing delay
     setTimeout(() => {
+      typingDiv.remove();
       const response = getBotResponse(message);
-      addMessage(response, false);
-    }, 500);
+      addMessage(response.text, false, response.suggestions || []);
+    }, 800);
   }
 
   chatSend.addEventListener('click', sendMessage);

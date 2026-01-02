@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="assets/boot.css">
+    <link rel="stylesheet" href="assets/newyear.css">
     <style>
       .guide-frame {
         background: linear-gradient(135deg, rgba(0,217,255,0.08), rgba(138,43,226,0.06));
@@ -94,10 +95,10 @@
           <ol>
             <li>Reboot your device into fastboot with: <code>adb reboot fastboot</code></li>
             <li>Verify your device is detected: <code>fastboot devices</code></li>
-            <li>If detected, flash recovery to both slots:
+            <li>If detected, boot into OrangeFox recovery:
               <ul>
-                <li><code>fastboot flash recovery_a OrangeFox-R12.1-OPKONA-V32.img</code></li>
-                <li><code>fastboot flash recovery_b OrangeFox-R12.1-OPKONA-V32.img</code></li>
+
+                <li><code>fastboot boot orangefox.img</code></li>
               </ul>
             </li>
           </ol>
@@ -116,6 +117,8 @@
       </div>
     </main>
 
+    <script src="assets/ai-assistant.js"></script>
     <script src="assets/boot.js?v=2"></script>
+    <script src="assets/newyear.js"></script>
   </body>
 </html>
