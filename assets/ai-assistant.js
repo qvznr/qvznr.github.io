@@ -32,7 +32,7 @@
         features: ['Aquamorphic Design', 'Trinity Engine', 'AI Features', 'Better Battery Life']
       },
       oxygenOS: {
-        version: '16.0.2.400',
+        version: '16.0.2.401',
         base: 'Global',
         android: 'Android 15',
         features: ['Clean UI', 'Fast Performance', 'OxygenOS Customization', 'Stock Android Feel']
@@ -271,7 +271,7 @@
       } else {
         response += '<strong>ColorOS 16.0.2.402</strong> (China Base)<br>';
         response += '• Aquamorphic Design, Trinity Engine, AI Features<br><br>';
-        response += '<strong>OxygenOS 16.0.2.400</strong> (Global Base)<br>';
+        response += '<strong>OxygenOS 16.0.2.401</strong> (Global Base)<br>';
         response += '• Clean UI, Fast Performance, Stock Feel<br>';
       }
       

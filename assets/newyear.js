@@ -336,45 +336,8 @@
     if (window._nyInteractionsInit) return;
     window._nyInteractionsInit = true;
 
-    // Don't add ripple to pages with inline styles (like roms page)
-    const hasInlineHeavyContent = document.querySelector('div[onmouseover]');
-    if (hasInlineHeavyContent) {
-      console.log('Skipping ripple effects on this page for performance');
-      return;
-    }
-
-    // Add ripple effect to clickable elements (non-blocking)
-    document.addEventListener('click', function(e) {
-      const clickable = e.target.closest('a, button, .cta, .nav-link, .card');
-      if (!clickable || clickable.classList.contains('no-ripple')) return;
-
-      try {
-        const ripple = document.createElement('span');
-        ripple.className = 'ripple';
-        
-        const rect = clickable.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-
-        const currentPosition = getComputedStyle(clickable).position;
-        if (currentPosition === 'static') {
-          clickable.style.position = 'relative';
-        }
-        clickable.style.overflow = 'hidden';
-        clickable.appendChild(ripple);
-
-        setTimeout(() => ripple.remove(), 800);
-      } catch (err) {
-        // Silently fail to not block interaction
-      }
-    }, { passive: true });
-
-    // Smooth scroll with easing (for anchor links)
+    // Skip interactions entirely - they interfere with page-specific styles
+    // Just keep smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
@@ -390,40 +353,6 @@
         }
       });
     });
-
-    // Parallax effect on scroll (only on home page, optimized)
-    if (document.querySelector('.hero')) {
-      let ticking = false;
-
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          window.requestAnimationFrame(() => {
-            updateParallax();
-            ticking = false;
-          });
-          ticking = true;
-        }
-      }, { passive: true });
-
-      function updateParallax() {
-        try {
-          const scrollY = window.scrollY;
-          const glow = document.querySelector('.glow');
-          if (glow) {
-            glow.style.transform = `translate3d(-50%, ${scrollY * 0.3}px, 0)`;
-          }
-
-          const heroElements = document.querySelectorAll('.hero .title, .hero .sub, .hero .cta-row');
-          heroElements.forEach((el, index) => {
-            if (el) {
-              el.style.transform = `translate3d(0, ${scrollY * (0.05 * (index + 1))}px, 0)`;
-            }
-          });
-        } catch (err) {
-          // Silently fail
-        }
-      }
-    }
   }
 
   // Add CSS animation for mega message
