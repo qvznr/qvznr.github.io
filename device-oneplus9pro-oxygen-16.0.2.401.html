@@ -29,6 +29,12 @@
     </div>
   </header>
 
+  <style>
+    /* Improve mobile layout to avoid glitches */
+    .rom-grid { display:grid; grid-template-columns:1fr; gap:32px; align-items:start; overflow-x:hidden; }
+    @media (min-width: 900px) { .rom-grid { grid-template-columns:1fr 1fr; gap:50px; } }
+  </style>
+
   <main class=\"container\" style=\"max-width:1100px;margin:110px auto;padding:40px 24px;overflow-x:hidden;\">
     <!-- Header Section -->
     <div style="margin-bottom:60px;">
@@ -42,7 +48,7 @@
     </div>
 
     <!-- Main Content Grid -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;overflow-x:hidden;">
+    <div class="rom-grid">
       <!-- Image Section -->
       <div style="position:relative;min-width:0;">
         <div style="position:relative;border-radius:20px;overflow:hidden;box-shadow:0 0 60px rgba(255,64,129,0.3), 0 20px 60px rgba(255,64,129,0.15);border:1px solid rgba(255,64,129,0.2);">
@@ -155,8 +161,8 @@
   <script src="assets/ai-assistant.js"></script>
   <script src="assets/boot.js"></script>
   <script>
-    const ROM_URL = 'https://sourceforge.net/projects/coloxy/files/OxygenOS%2016/16.0.2.401/ota_full-LE2123_16.0.2.401-CPH2745-01031229-IN-2025-12-01-23b2da3913.zip/download';
-    const KERNEL_URL = 'https://sourceforge.net/projects/coloxy/files/OxygenOS%2016/16.0.2.401/OnePlus%209%20Pro-Kernel.zip/download';
+    const ROM_URL = 'https://sourceforge.net/projects/colorosports/files/OxygenOS%2016/16.0.2.401_OnePlus15/ota_full-LE2123_16.0.2.401-CPH2745-01031229-IN-2025-12-01-23b2da3913.zip/download';
+    const KERNEL_URL = 'https://sourceforge.net/projects/colorosports/files/OxygenOS%2016/16.0.2.401_OnePlus15/Rapchick_Kernal_v1.zip/download';
     
     const mirrors = [
       { name: 'PhoenixNAP', domain: 'phoenixnap', icon: '⚡', base: 40, peak: 45 },
