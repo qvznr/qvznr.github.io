@@ -30,9 +30,15 @@
   </header>
 
   <style>
-    /* Improve mobile layout to avoid glitches */
-    .rom-grid { display:grid; grid-template-columns:1fr; gap:32px; align-items:start; overflow-x:hidden; }
-    @media (min-width: 900px) { .rom-grid { grid-template-columns:1fr 1fr; gap:50px; } }
+    /* Optimize mobile layout and disable expensive effects */
+    body { overflow-x: hidden; }
+    .rom-grid { display:flex; flex-direction:column; gap:28px; align-items:stretch; overflow-x:hidden; }
+    @media (min-width: 920px) { .rom-grid { display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:start; } }
+    /* Remove expensive backdrop filters for mobile */
+    @media (max-width: 768px) {
+      .content-page { backdrop-filter: none !important; }
+      * { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+    }
   </style>
 
   <main class=\"container\" style=\"max-width:1100px;margin:110px auto;padding:40px 24px;overflow-x:hidden;\">
