@@ -242,30 +242,53 @@ code {
   </div>
 
 <div class="guide-card">
-  <h2>Before You Start</h2>
+  <h2>Before You Start <span style="opacity:.6;">(Prerequisites)</span></h2>
 
-  <ol class="guide-list">
-    <li>Unlocked bootloader is mandatory</li>
-    <li>Latest official firmware must be installed</li>
-    <li>OrangeFox recovery image should be downloaded</li>
+  <ul>
+    <li>Unlocked Bootloader + latest Official update installed</li>
+    <li>Download OrangeFox recovery</li>
+  </ul>
+
+  <h3>Step 1: Boot Phone into Fastboot Mode</h3>
+
+  <ol>
+    <li>
+      Reboot your device into fastboot with:
+      <code>adb reboot bootloader</code>
+    </li>
+
+    <li>
+      Verify your device is detected:
+      <code>fastboot devices</code>
+    </li>
+
+    <li>
+      If detected, boot into OrangeFox Recovery:
+      <code>fastboot boot orangefox.img</code>
+    </li>
   </ol>
 
-  <p>Reboot your device into fastboot mode:</p>
-  <code>adb reboot fastboot</code>
+  <h3>Sideload ROM</h3>
 
-  <p>Verify that the device is detected:</p>
-  <code>fastboot devices</code>
+  <ol>
+    <li>
+      Go to recovery:
+      <code>adb reboot recovery</code>
+    </li>
 
-  <p>Boot OrangeFox recovery:</p>
-  <code>fastboot boot orangefox.img</code>
+    <li>Format data in recovery menu</li>
 
-  <p>In recovery, format data and start ADB sideload. Then run:</p>
-  <code>adb sideload rom.zip</code>
+    <li>Select ADB sideload from recovery</li>
 
-  <p class="note">
-    Note: If the progress stops at 47%, this is normal.
-    Installation will continue automatically.
-  </p>
+    <li>
+      Transfer ROM:
+      <code>adb sideload rom.zip</code>
+    </li>
+
+    <li>
+      Note: If transfer stops at 47%, this is normal
+    </li>
+  </ol>
 </div>
 
 
