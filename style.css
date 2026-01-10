@@ -842,7 +842,8 @@ footer {
 }
 
 .rom-card img {
-  width: 140px;
+  width: 150px;
+  filter: drop-shadow(0 10px 25px rgba(255,255,255,0.15));
 }
 
 .rom-card small {
