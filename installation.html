@@ -241,30 +241,33 @@ code {
     <img src="assets/op15.png" alt="OnePlus 15">
   </div>
 
-  <div class="guide-card">
-    <h2>Before You Start</h2>
-    <ul>
-      <li>Unlocked bootloader</li>
-      <li>Latest official firmware installed</li>
-      <li>OrangeFox recovery downloaded</li>
-    </ul>
+<div class="guide-card">
+  <h2>Before You Start</h2>
 
-    <h3>Step 1: Fastboot</h3>
-    <p>Reboot your device into fastboot mode:</p>
-    <code>adb reboot fastboot</code>
+  <ul>
+    <li>Unlocked bootloader is mandatory</li>
+    <li>Latest official firmware must be installed</li>
+    <li>OrangeFox recovery image should be downloaded</li>
+  </ul>
 
-    <p>Verify the device connection:</p>
-    <code>fastboot devices</code>
+  <p>Reboot your device into fastboot mode:</p>
+  <code>adb reboot fastboot</code>
 
-    <p>Boot OrangeFox recovery:</p>
-    <code>fastboot boot orangefox.img</code>
+  <p>Verify that the device is detected:</p>
+  <code>fastboot devices</code>
 
-    <h3>Step 2: Sideload ROM</h3>
-    <p>Format data, then select ADB sideload and run:</p>
-    <code>adb sideload rom.zip</code>
+  <p>Boot OrangeFox recovery:</p>
+  <code>fastboot boot orangefox.img</code>
 
-    <p class="note">Note: 47% freeze is normal. Installation continues automatically.</p>
-  </div>
+  <p>In recovery, format data and start ADB sideload. Then run:</p>
+  <code>adb sideload rom.zip</code>
+
+  <p class="note">
+    Note: If the progress stops at 47%, do not panic. This is normal and the
+    installation will continue automatically.
+  </p>
+</div>
+
 </section>
 
 </body>
