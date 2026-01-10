@@ -1,212 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Supported Devices - ColorOS Ports</title>
-    <meta name="description" content="ColorOS 16 / OxygenOS 16 supported devices - Download ROMs for OnePlus 9 Pro, 9, 8 Pro, 8">
-    <meta name="keywords" content="OnePlus 9 Pro, OnePlus 9, OnePlus 8 Pro, OnePlus 8, ColorOS, OxygenOS, supported devices">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="assets/boot.css">
-    <style>
-      .devices-page {
-        background: linear-gradient(135deg, #0a0e1a 0%, #1a0a2e 50%, #0a0e1a 100%);
-        min-height: 100vh;
-        padding-bottom: 80px;
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Supported Devices - ColorOS Ports</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .devices-page {
+      background: linear-gradient(135deg, #0a0e1a 0%, #1a0a2e 50%, #0a0e1a 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .devices-hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 100px 20px 60px;
+      position: relative;
+      text-align: center;
+    }
+
+    .devices-hero .page-title {
+      font-size: 8rem;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.08);
+      text-shadow: 0 0 40px rgba(0, 217, 255, 0.1);
+      margin: 0;
+      letter-spacing: -2px;
+      line-height: 1;
+      position: relative;
+      z-index: 2;
+    }
+
+    .devices-hero .hero-text {
+      position: relative;
+      z-index: 2;
+      margin-top: 20px;
+    }
+
+    .devices-hero h2 {
+      font-size: 1.3rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin: 0 0 10px 0;
+      font-weight: 400;
+    }
+
+    .devices-hero p {
+      color: rgba(255, 255, 255, 0.6);
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .ported-by {
+      position: absolute;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      right: 40px;
+      bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-indicator svg {
+      width: 20px;
+      height: 30px;
+      stroke: rgba(255, 255, 255, 0.4);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+
+    .devices-container {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .devices-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .device-card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 40px 30px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .device-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(0, 217, 255, 0.05), transparent);
+      transform: rotate(45deg);
+      transition: all 0.5s ease;
+    }
+
+    .device-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(0, 217, 255, 0.3);
+      box-shadow: 0 20px 50px rgba(0, 217, 255, 0.15);
+    }
+
+    .device-image {
+      width: 100%;
+      max-width: 180px;
+      height: 280px;
+      margin: 0 auto 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .device-image img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 20px rgba(0, 217, 255, 0.2));
+      transition: transform 0.3s ease;
+    }
+
+    .device-card:hover .device-image img {
+      transform: scale(1.08);
+    }
+
+    .device-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 25px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .download-btn {
+      display: inline-block;
+      padding: 12px 32px;
+      background: #fff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+      letter-spacing: 1px;
+    }
+
+    .download-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      .devices-hero .page-title {
+        font-size: 4rem;
       }
-      
-      .devices-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 110px 20px 40px;
+
+      .devices-hero {
+        padding: 80px 20px 40px;
       }
-      
-      .page-title {
-        text-align: center;
-        font-size: 3rem;
-        font-weight: 900;
-        background: linear-gradient(135deg, #00d9ff, #ff4081);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: 1rem;
-        text-shadow: 0 0 40px rgba(0,217,255,0.3);
+
+      .ported-by {
+        right: 20px;
+        font-size: 0.8rem;
       }
-      
-      .page-subtitle {
-        text-align: center;
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 1.2rem;
-        margin-bottom: 60px;
+
+      .scroll-indicator {
+        right: 20px;
+        bottom: 20px;
       }
-      
+
       .devices-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: 1fr;
         gap: 30px;
-        margin-top: 40px;
       }
-      
+
       .device-card {
-        background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 20px;
-        padding: 30px;
-        text-align: center;
-        transition: all 0.3s ease;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
+        padding: 30px 20px;
       }
-      
-      .device-card::before {
-        content: "";
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: linear-gradient(
-          45deg,
-          transparent,
-          rgba(0, 217, 255, 0.05),
-          transparent
-        );
-        transform: rotate(45deg);
-        transition: all 0.5s ease;
-      }
-      
-      .device-card:hover {
-        transform: translateY(-10px);
-        border-color: rgba(0, 217, 255, 0.4);
-        box-shadow: 0 20px 60px rgba(0, 217, 255, 0.2);
-      }
-      
-      .device-card:hover::before {
-        left: 100%;
-      }
-      
+
       .device-image {
-        width: 100%;
-        max-width: 200px;
-        height: 250px;
-        margin: 0 auto 20px;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(0, 217, 255, 0.03);
-        border-radius: 12px;
+        height: 240px;
+        max-width: 160px;
       }
-      
-      .device-image img {
-        max-width: 90%;
-        max-height: 90%;
-        object-fit: contain;
-        filter: drop-shadow(0 10px 30px rgba(0, 217, 255, 0.3));
-        transition: transform 0.3s ease;
-      }
-      
-      .device-card:hover .device-image img {
-        transform: scale(1.05);
-      }
-      
+
       .device-name {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #fff;
-        margin-bottom: 10px;
-        position: relative;
-        z-index: 1;
+        font-size: 1.3rem;
+        margin-bottom: 20px;
       }
-      
-      .device-status {
-        display: inline-block;
-        padding: 6px 16px;
-        background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(255, 64, 129, 0.2));
-        border: 1px solid rgba(0, 217, 255, 0.3);
-        border-radius: 20px;
-        font-size: 0.85rem;
-        color: #00d9ff;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-      
-      @media (max-width: 768px) {
-        .page-title {
-          font-size: 2.2rem;
-          margin-bottom: 0.8rem;
-        }
-        
-        .page-subtitle {
-          font-size: 1rem;
-          margin-bottom: 40px;
-          padding: 0 10px;
-        }
-        
-        .devices-container {
-          padding: 80px 16px 60px;
-        }
-        
-        .devices-grid {
-          grid-template-columns: 1fr;
-          gap: 20px;
-        }
-        
-        .device-card {
-          padding: 24px;
-        }
-        
-        .device-image {
-          height: 220px;
-          max-width: 180px;
-        }
-        
-        .device-name {
-          font-size: 1.3rem;
-        }
-      }
-    </style>
-  </head>
-  <body class="devices-page">
-    <header class="site-header">
-      <div class="header-inner">
-        <div class="logo">ColorOS Ports</div>
-        <button class="menu-toggle" aria-label="Toggle menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <nav class="site-nav">
-          <a href="home.html" class="nav-link">Home</a>
-          <a href="roms.html" class="nav-link">Roms</a>
-          <a href="devices.html" class="nav-link">Devices</a>
-          <a href="installation.html" class="nav-link">Installation Guide</a></nav>
-        <div class="header-actions">
-          <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
-        </div>
-      </div>
-    </header>
 
-    <main class="devices-container">
-      <h1 class="page-title">Supported Devices</h1>
-      <p class="page-subtitle">ColorOS 16 / OxygenOS 16 Ports are available for the following OnePlus devices</p>
-      
-      <div class="devices-grid">
-        <div class="device-card" style="text-decoration:none;color:inherit;cursor:default;">
-          <div class="device-image">
-            <img src="https://fdn2.gsmarena.com/vv/bigpic/oneplus-9-pro-.jpg" alt="OnePlus 9 Pro" onerror="this.src='https://fdn2.gsmarena.com/vv/pics/oneplus/oneplus-9-pro.jpg'">
-          </div>
-          <h3 class="device-name">OnePlus 9 Pro</h3>
-          <span class="device-status">Supported</span>
-        </div>
-      </div>
-    </main>
+      .download-btn {
+        padding: 10px 24px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body class="devices-page">
 
-    <script src="assets/ai-assistant.js"></script>
-    <script src="assets/boot.js?v=2"></script>
-  </body>
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="logo">ColorOS Ports</div>
+
+  <nav class="nav" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="roms.html">Explore ROMs</a>
+    <a href="devices.html" class="active">Supported Device</a>
+    <a href="installation.html">Installation Guide</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="roms.html">Explore ROMs</a>
+  <a href="devices.html">Supported Device</a>
+  <a href="installation.html">Installation Guide</a>
+</nav>
+
+<!-- ===== DEVICES HERO ===== -->
+<section class="devices-hero">
+  <h1 class="page-title">DEVICE</h1>
+  <div class="hero-text">
+    <h2>Choose your Device, then pick a device to download via IDM</h2>
+    <p>Ported By Aditya</p>
+  </div>
+
+  <div class="ported-by">SCROLL DOWN</div>
+
+  <div class="scroll-indicator">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 14.5l5-5m0 0l-5-5m5 5h-10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ===== DEVICES CONTAINER ===== -->
+<div class="devices-container">
+  <div class="devices-grid">
+    <div class="device-card">
+      <div class="device-image">
+        <img src="https://fdn2.gsmarena.com/vv/bigpic/oneplus-9-pro-.jpg" alt="OnePlus 9 Pro" onerror="this.src='https://fdn2.gsmarena.com/vv/pics/oneplus/oneplus-9-pro.jpg'">
+      </div>
+      <h3 class="device-name">OnePlus 9 Pro</h3>
+      <button class="download-btn" onclick="location.href='device-oneplus9pro.html'">DOWNLOAD</button>
+    </div>
+
+    <div class="device-card">
+      <div class="device-image">
+        <img src="https://fdn2.gsmarena.com/vv/bigpic/oneplus-9-.jpg" alt="OnePlus 9" onerror="this.src='https://fdn2.gsmarena.com/vv/pics/oneplus/oneplus-9.jpg'">
+      </div>
+      <h3 class="device-name">OnePlus 9</h3>
+      <button class="download-btn" onclick="location.href='roms.html'">DOWNLOAD</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/ai-assistant.js"></script>
+<script src="assets/boot.js?v=2"></script>
+</body>
 </html>
