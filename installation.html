@@ -127,30 +127,29 @@ body {
 
 /* Phone */
 .phone {
+  min-height: 820px;   /* gives space so it doesn’t look squashed */
   display: flex;
   align-items: center;
   justify-content: center;
-
-  min-height: 720px;   /* gives the image vertical room */
   perspective: 1200px;
 }
 
 
 .phone img {
-  width: 440px;          /* control size ONLY by width */
-  height: auto;          /* NEVER touch height */
-  aspect-ratio: auto;    /* ensure natural ratio */
-  object-fit: contain;   /* safety net */
+  width: 520px;        /* ⬅️ BIGGER */
+  height: auto;
+  object-fit: contain;
 
   transform: rotateZ(-6deg) rotateY(-12deg);
   transform-origin: center;
 
   filter:
-    drop-shadow(0 70px 160px rgba(0,0,0,0.95))
-    drop-shadow(0 0 90px rgba(255,255,255,0.08));
+    drop-shadow(0 90px 200px rgba(0,0,0,0.95))
+    drop-shadow(0 0 120px rgba(255,255,255,0.12));
 
   display: block;
 }
+
 
 
 /* ================= GUIDE CARD ================= */
@@ -158,9 +157,16 @@ body {
   max-width: 560px;
   padding: 64px 56px;
   border-radius: 28px;
-  background: rgba(22,22,22,0.85);
+
+  background: rgba(22,22,22,0.9);
   backdrop-filter: blur(24px);
-  border: 1px solid rgba(255,255,255,0.08);
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.06),
+    0 40px 120px rgba(0,0,0,0.85),
+    0 0 60px rgba(255,255,255,0.08); /* ✨ glow */
 }
 
 /* Headings */
