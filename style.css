@@ -505,17 +505,18 @@ header {
 }
 
 .hero-right {
-  position: absolute;
-  right: -80px;
-  top: 50%;
-  transform: translateY(-50%);
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .light-wrap {
   position: relative;
-  width: 680px;          /* BIGGER */
-  max-width: 95%;
-  transform: translateX(40px); /* Push slightly right */
+  width: 1100px;
+  height: auto;
+  max-width: none;     /* IMPORTANT */
 }
 
 .light-wrap img {
@@ -523,35 +524,27 @@ header {
   height: auto;
   display: block;
 
-  filter:
-    brightness(1.15)
-    contrast(1.08)
-    drop-shadow(0 0 90px rgba(255,255,255,0.35));
+  transform: scale(1.35); /* REAL SCALING */
+  transform-origin: center;
 
-  -webkit-mask-image: radial-gradient(
-    ellipse at center,
-    black 50%,
-    transparent 80%
-  );
-  mask-image: radial-gradient(
-    ellipse at center,
-    black 50%,
-    transparent 80%
-  );
+  filter:
+    brightness(1.2)
+    contrast(1.1)
+    drop-shadow(0 0 140px rgba(255,255,255,0.45));
 }
 
 /* BACKGROUND GLOW */
 .light-wrap::before {
   content: "";
   position: absolute;
-  inset: -180px; /* larger glow area */
+  inset: -250px; /* BIG glow radius */
   background: radial-gradient(
-    circle,
-    rgba(255,255,255,0.22),
+    ellipse at center,
+    rgba(255,255,255,0.35),
     transparent 70%
   );
+  filter: blur(80px);
   z-index: -1;
-  filter: blur(60px);
 }
 
 .scroll {
