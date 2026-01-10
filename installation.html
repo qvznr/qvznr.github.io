@@ -51,24 +51,25 @@ body {
   font-size: 12px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: rgba(255,255,255,.55);
+  color: rgba(255,255,255,.6);
   text-decoration: none;
-  padding: 10px 18px;
-  border-radius: 12px;
+
+  padding: 10px 20px;
+  border-radius: 14px;
+
+  transition: all .25s ease;
+}
+
+.nav-links a:hover {
+  color: #fff;
 }
 
 .nav-links a.active {
   color: #fff;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.14);
 }
 
-.download-btn {
-  background: #fff;
-  color: #000 !important;
-  border-radius: 999px;
-  font-weight: 600;
-}
 
 /* ================= HERO ================= */
 .hero {
@@ -238,10 +239,12 @@ code {
 <header class="header">
   <div class="logo">ColorOS Ports</div>
   <nav class="nav-links">
-    <a href="#" class="active">Guide</a>
-    <a href="#">Explore Roms</a>
-    <a href="#">Devices</a>
-    <a href="#" class="download-btn">Download</a>
+  <a href="index.html">Home</a>
+  <a href="installation.html" class="active">Guide</a>
+  <a href="devices.html">Devices</a>
+  <a href="roms.html">ROMs</a>
+</nav>
+
   </nav>
 </header>
 
