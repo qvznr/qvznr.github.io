@@ -256,6 +256,48 @@ code {
     <p class="hero-credit">Ported By Aditya</p>
   </div>
 </section>
+  
+  <div class="scroll-indicator">
+  <span></span>
+</div>
+ /* ===== Scroll Down Indicator ===== */
+.scroll-indicator {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 44px;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.scroll-indicator span {
+  width: 6px;
+  height: 6px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 50%;
+  margin-top: 8px;
+  animation: scrollDot 1.8s infinite;
+}
+
+@keyframes scrollDot {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+}
+
+
 
 <section class="content">
   <div class="phone">
