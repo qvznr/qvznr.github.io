@@ -542,7 +542,7 @@ header {
 
 .light-wrap {
   position: relative;
-  width: 900px;         /* BIG size */
+  width: 1100px;        /* Bigger container */
   max-width: 95%;
 }
 
@@ -552,7 +552,7 @@ header {
   display: block;
 
   /* Scale bigger */
-  transform: scale(1.8) translateX(280px);
+  transform: scale(2.2) translateX(350px);
   transform-origin: center;
 
   /* Brightness & contrast tweak */
