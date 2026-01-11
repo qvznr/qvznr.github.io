@@ -130,15 +130,25 @@
     </div>
     <div style="padding: 28px;">
       <p style="color: #aaa; margin: 0 0 20px 0;">Choose your preferred download mirror. IDM will automatically intercept the download.</p>
-      <button onclick="directDownload()" style="width: 100%; padding: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; color: #fff; font-weight: 700; cursor: pointer; transition: all .3s; margin-bottom: 10px;"
+      <button onclick="testMirror('freefr.dl.sourceforge.net')" style="width: 100%; padding: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; color: #fff; font-weight: 700; cursor: pointer; transition: all .3s; margin-bottom: 10px;"
               onmouseover="this.style.background='rgba(255,255,255,0.15)'"
               onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-        IDM Mirror 1
+        🇫🇷 FreeFr Mirror
       </button>
-      <button onclick="directDownload()" style="width: 100%; padding: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; color: #fff; font-weight: 700; cursor: pointer; transition: all .3s;"
+      <button onclick="testMirror('delska.dl.sourceforge.net')" style="width: 100%; padding: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; color: #fff; font-weight: 700; cursor: pointer; transition: all .3s; margin-bottom: 10px;"
               onmouseover="this.style.background='rgba(255,255,255,0.15)'"
               onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-        IDM Mirror 2
+        🇷🇸 Delska Mirror
+      </button>
+      <button onclick="testMirror('gigenet.dl.sourceforge.net')" style="width: 100%; padding: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; color: #fff; font-weight: 700; cursor: pointer; transition: all .3s; margin-bottom: 10px;"
+              onmouseover="this.style.background='rgba(255,255,255,0.15)'"
+              onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+        🇺🇸 Gigenet Mirror
+      </button>
+      <button onclick="testMirror('phoenixnap.dl.sourceforge.net')" style="width: 100%; padding: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; color: #fff; font-weight: 700; cursor: pointer; transition: all .3s; margin-bottom: 10px;"
+              onmouseover="this.style.background='rgba(255,255,255,0.15)'"
+              onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+        ⚡ PhoenixNAP Mirror
       </button>
     </div>
   </div>
@@ -196,6 +206,12 @@ function downloadKernel() {
 
 function downloadRecovery() {
   window.open(RECOVERY_URL, '_blank');
+}
+
+function testMirror(mirror) {
+  const url = ROM_URL.replace('sourceforge.net', mirror);
+  window.open(url, '_blank');
+  setTimeout(() => closeModal(), 1000);
 }
 </script>
 
