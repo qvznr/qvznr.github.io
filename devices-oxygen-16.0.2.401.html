@@ -1,247 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>OxygenOS 16.0.2.401 — Supported Devices</title>
-  <meta name="description" content="Download OxygenOS 16.0.2.401 for supported OnePlus devices">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .devices-hero {
-      padding: 160px 60px 80px;
-      text-align: center;
-    }
-
-    .version-badge {
-      display: inline-block;
-      background: rgba(0,217,255,0.15);
-      border: 1px solid rgba(0,217,255,0.4);
-      color: #00d9ff;
-      padding: 8px 20px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-    }
-
-    .devices-hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 8vw, 4rem);
-      margin: 0 0 16px 0;
-      background: linear-gradient(135deg, #ff6fa3, #ff3366);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: 2px;
-    }
-
-    .devices-hero p {
-      color: rgba(255,255,255,0.7);
-      font-size: 1.1rem;
-      margin: 0;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .devices-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 60px 100px;
-    }
-
-    .devices-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-      gap: 32px;
-    }
-
-    .device-card {
-      position: relative;
-      background: linear-gradient(135deg, rgba(255,64,129,0.08), rgba(255,64,129,0.04));
-      border: 1px solid rgba(255,64,129,0.25);
-      border-radius: 24px;
-      padding: 36px 28px;
-      text-align: center;
-      cursor: pointer;
-      transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      overflow: hidden;
-    }
-
-    .device-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 0%, rgba(255,64,129,0.15), transparent 70%);
-      opacity: 0;
-      transition: opacity .4s ease;
-    }
-
-    .device-card:hover::before {
-      opacity: 1;
-    }
-
-    .device-card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 24px 64px rgba(255,64,129,0.35), 0 0 40px rgba(255,64,129,0.2);
-      border-color: rgba(255,64,129,0.5);
-    }
-
-    .device-icon {
-      width: 140px;
-      height: 140px;
-      background: linear-gradient(135deg, #ff6fa3, #ff3366);
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      box-shadow: 0 12px 32px rgba(255,64,129,0.35);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .device-icon::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent 50%);
-    }
-
-    .device-icon img {
-      width: 90%;
-      height: 90%;
-      object-fit: contain;
-      position: relative;
-      z-index: 1;
-    }
-
-    .device-name {
-      margin: 0;
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-      color: #ff6fa3;
-      letter-spacing: 1px;
-    }
-
-    .device-codename {
-      color: rgba(255,255,255,0.5);
-      font-size: 0.9rem;
-      margin: -8px 0 0 0;
-      font-weight: 500;
-    }
-
-    .device-status {
-      background: rgba(0,217,255,0.15);
-      border: 1px solid rgba(0,217,255,0.3);
-      color: #00d9ff;
-      padding: 6px 16px;
-      border-radius: 16px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-
-    .download-arrow {
-      color: #ff6fa3;
-      font-size: 1.5rem;
-      transition: transform .3s ease;
-    }
-
-    .device-card:hover .download-arrow {
-      transform: translateY(4px);
-    }
-
-    @media (max-width: 960px) {
-      .devices-container {
-        padding: 0 24px 80px;
-      }
-
-      .devices-hero {
-        padding: 140px 24px 60px;
-      }
-
-      .devices-grid {
-        gap: 24px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="header">
-    <div class="logo">ColorOS Ports</div>
-    <nav class="nav" id="navLinks">
-      <a href="index.html">Home</a>
-      <a href="roms.html" class="active">Explore ROMs</a>
-      <a href="devices.html">Supported Device</a>
-      <a href="installation.html">Installation Guide</a>
-    </nav>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </header>
 
-  <nav class="mobile-menu" id="mobileMenu">
+<header class="header">
+  <div class="logo">ColorOS Ports</div>
+  <nav class="nav" id="navLinks">
     <a href="index.html">Home</a>
-    <a href="roms.html">Explore ROMs</a>
+    <a href="roms.html" class="active">Explore ROMs</a>
     <a href="devices.html">Supported Device</a>
     <a href="installation.html">Installation Guide</a>
   </nav>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
 
-  <section class="devices-hero">
-    <span class="version-badge">● Latest Version</span>
-    <h1>Version 16.0.2.401</h1>
-    <p>Select your device to download the ROM</p>
-  </section>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="roms.html">Explore ROMs</a>
+  <a href="devices.html">Supported Device</a>
+  <a href="installation.html">Installation Guide</a>
+</nav>
 
-  <div class="devices-container">
-    <div class="devices-grid">
-      <a href="device-oneplus9pro-oxygen-16.0.2.401.html" class="device-card">
-        <div class="device-icon">
-          <img src="assets/op15.png" alt="OnePlus 9 Pro" onerror="this.style.display='none';this.parentElement.innerHTML='📱'">
-        </div>
-        <h3 class="device-name">OnePlus 9 Pro</h3>
-        <p class="device-codename">LE2123</p>
-        <span class="device-status">● Available</span>
-        <span class="download-arrow">↓</span>
-      </a>
-    </div>
+<section style="padding: 220px 60px 80px; text-align: center;">
+  <span style="display: inline-block; font-size: 0.75rem; color: #5cff5c; background: rgba(92,255,92,0.15); padding: 6px 12px; border-radius: 20px; margin-bottom: 20px;">● Latest Version</span>
+  <h1 style="font-size: 3.5rem; margin-bottom: 20px; background: linear-gradient(to bottom, #fff 30%, rgba(255,255,255,0.4)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Version 16.0.2.401</h1>
+  <p style="color: #777; font-size: 1rem;">Select your device to download the ROM</p>
+</section>
+
+<section style="max-width: 1000px; margin: 0 auto; padding: 0 60px 100px;">
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px;">
+    
+    <a href="device-oneplus9pro-oxygen-16.0.2.401.html" style="text-decoration: none; color: inherit; padding: 32px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; transition: all .3s ease; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center;"
+       onmouseover="this.style.background='rgba(255,255,255,0.06)'; this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 60px rgba(255,255,255,0.1)'"
+       onmouseout="this.style.background='rgba(255,255,255,0.04)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+      <div style="width: 120px; height: 120px; background: rgba(255,255,255,0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 3rem; border: 1px solid rgba(255,255,255,0.1);">📱</div>
+      <h3 style="margin: 0; font-size: 1.3rem; font-weight: 700;">OnePlus 9 Pro</h3>
+      <p style="margin: 0; color: #666; font-size: 0.85rem;">LE2123</p>
+      <span style="background: rgba(92,255,92,0.15); color: #5cff5c; padding: 6px 14px; border-radius: 16px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">● Available</span>
+    </a>
+
   </div>
+</section>
 
-  <script src="assets/boot.js"></script>
-  <script>
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
+<script>
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
 
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      mobileMenu.classList.toggle('active');
-    });
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileMenu.classList.toggle('active');
+});
 
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        mobileMenu.classList.remove('active');
-      });
-    });
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+  });
+});
 
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.header') && !e.target.closest('.mobile-menu')) {
-        hamburger.classList.remove('active');
-        mobileMenu.classList.remove('active');
-      }
-    });
-  </script>
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.header') && !e.target.closest('.mobile-menu')) {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+  }
+});
+</script>
+
 </body>
 </html>

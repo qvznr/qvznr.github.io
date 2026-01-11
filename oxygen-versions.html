@@ -1,242 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>OxygenOS 16 Versions — ColorOS Ports</title>
-  <meta name="description" content="Select OxygenOS 16 ROM version">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/boot.css">
-  <link rel="stylesheet" href="style.css">
-  <style>
-    body {
-      font-family: var(--font-body);
-      background: #000;
-      color: #fff;
-      min-height: 100vh;
-    }
-
-    .page-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 140px 24px 80px;
-    }
-
-    .page-hero {
-      text-align: center;
-      margin-bottom: 80px;
-    }
-
-    .page-hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 8vw, 4rem);
-      margin: 0 0 20px 0;
-      background: linear-gradient(135deg, #ff6fa3, #ff3366);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: 2px;
-    }
-
-    .page-hero p {
-      color: rgba(255,255,255,0.7);
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .version-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-      gap: 32px;
-      margin-top: 60px;
-    }
-
-    .version-card {
-      position: relative;
-      background: linear-gradient(135deg, rgba(255,64,129,0.08), rgba(255,64,129,0.04));
-      border: 1px solid rgba(255,64,129,0.25);
-      border-radius: 20px;
-      padding: 40px 32px;
-      text-align: center;
-      cursor: pointer;
-      transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      overflow: hidden;
-    }
-
-    .version-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 0%, rgba(255,64,129,0.1), transparent 70%);
-      opacity: 0;
-      transition: opacity .4s ease;
-    }
-
-    .version-card:hover::before {
-      opacity: 1;
-    }
-
-    .version-card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 24px 64px rgba(255,64,129,0.3), 0 0 40px rgba(255,64,129,0.15);
-      border-color: rgba(255,64,129,0.5);
-    }
-
-    .version-icon {
-      width: 64px;
-      height: 64px;
-      margin: 0 auto 12px;
-      background: linear-gradient(135deg, #ff6fa3, #ff3366);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      box-shadow: 0 8px 24px rgba(255,64,129,0.3);
-    }
-
-    .version-card h3 {
-      margin: 0;
-      font-family: var(--font-display);
-      color: #ff6fa3;
-      font-size: 1.8rem;
-      letter-spacing: 1px;
-    }
-
-    .version-tag {
-      display: inline-block;
-      padding: 8px 20px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .version-tag.latest {
-      background: linear-gradient(135deg, rgba(0,217,255,0.25), rgba(0,217,255,0.15));
-      color: #00d9ff;
-      border: 1px solid rgba(0,217,255,0.4);
-      box-shadow: 0 4px 16px rgba(0,217,255,0.2);
-    }
-
-    .version-tag.stable {
-      background: linear-gradient(135deg, rgba(76,175,80,0.25), rgba(56,142,60,0.15));
-      color: #4caf50;
-      border: 1px solid rgba(76,175,80,0.4);
-    }
-
-    .version-desc {
-      color: rgba(255,255,255,0.75);
-      font-size: 1rem;
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    .version-base {
-      color: rgba(255,255,255,0.5);
-      font-size: 0.9rem;
-      margin: 0;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-
-    @media (max-width: 768px) {
-      .page-container {
-        padding: 120px 20px 60px;
-      }
-
-      .version-grid {
-        gap: 24px;
-      }
-
-      .version-card {
-        padding: 32px 24px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="logo">ColorOS Ports</div>
-    <nav class="nav" id="navLinks">
-      <a href="index.html">Home</a>
-      <a href="roms.html" class="active">Explore ROMs</a>
-      <a href="devices.html">Supported Device</a>
-      <a href="installation.html">Installation Guide</a>
-    </nav>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </header>
 
-  <nav class="mobile-menu" id="mobileMenu">
+<header class="header">
+  <div class="logo">ColorOS Ports</div>
+  <nav class="nav" id="navLinks">
     <a href="index.html">Home</a>
-    <a href="roms.html">Explore ROMs</a>
+    <a href="roms.html" class="active">Explore ROMs</a>
     <a href="devices.html">Supported Device</a>
     <a href="installation.html">Installation Guide</a>
   </nav>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
 
-  <!-- Main Content -->
-  <div class="page-container">
-    <div class="page-hero">
-      <h1>OxygenOS 16</h1>
-      <p>Clean, minimalist UI with premium animations and optimized performance</p>
-    </div>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="roms.html">Explore ROMs</a>
+  <a href="devices.html">Supported Device</a>
+  <a href="installation.html">Installation Guide</a>
+</nav>
 
-    <div class="version-grid">
-      <a href="devices-oxygen-16.0.2.401.html" class="version-card">
-        <div class="version-icon">📱</div>
-        <h3>16.0.2.401</h3>
-        <span class="version-tag latest">● Latest</span>
-        <p class="version-desc">Latest stable build with all optimizations and newest features</p>
-        <p class="version-base">Based on OnePlus 15 Global</p>
-      </a>
+<section style="padding: 220px 60px 100px; text-align: center;">
+  <h1 style="font-size: 3.5rem; margin-bottom: 20px; background: linear-gradient(to bottom, #fff 30%, rgba(255,255,255,0.4)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">OxygenOS 16</h1>
+  <p style="color: #777; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Clean, minimalist UI with premium animations and optimized performance</p>
+</section>
 
-      <a href="devices-oxygen-16.0.2.400.html" class="version-card">
-        <div class="version-icon">🔒</div>
-        <h3>16.0.2.400</h3>
-        <span class="version-tag stable">● Stable</span>
-        <p class="version-desc">Proven stability with long-term support and reliability</p>
-        <p class="version-base">Based on OnePlus 12R Global</p>
-      </a>
-    </div>
+<section style="max-width: 1000px; margin: 0 auto; padding: 0 60px 100px;">
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px;">
+    
+    <a href="devices-oxygen-16.0.2.401.html" style="text-decoration: none; color: inherit; padding: 40px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; transition: all .3s ease; display: flex; flex-direction: column; gap: 20px; text-align: center;"
+       onmouseover="this.style.background='rgba(255,255,255,0.06)'; this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 60px rgba(255,255,255,0.1)'"
+       onmouseout="this.style.background='rgba(255,255,255,0.04)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+      <h2 style="margin: 0; font-size: 2rem; font-weight: 800;">16.0.2.401</h2>
+      <span style="background: rgba(92,255,92,0.15); color: #5cff5c; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">● Latest</span>
+      <p style="margin: 0; color: #aaa; font-size: 0.95rem; line-height: 1.6;">Latest stable build with all optimizations and newest features</p>
+      <p style="margin: 0; color: #666; font-size: 0.85rem;">Based on OnePlus 15 Global</p>
+    </a>
+
+    <a href="devices-oxygen-16.0.2.400.html" style="text-decoration: none; color: inherit; padding: 40px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; transition: all .3s ease; display: flex; flex-direction: column; gap: 20px; text-align: center;"
+       onmouseover="this.style.background='rgba(255,255,255,0.06)'; this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 60px rgba(255,255,255,0.1)'"
+       onmouseout="this.style.background='rgba(255,255,255,0.04)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+      <h2 style="margin: 0; font-size: 2rem; font-weight: 800;">16.0.2.400</h2>
+      <span style="background: rgba(255,255,255,0.08); color: #aaa; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Stable</span>
+      <p style="margin: 0; color: #aaa; font-size: 0.95rem; line-height: 1.6;">Proven stability with long-term support and reliability</p>
+      <p style="margin: 0; color: #666; font-size: 0.85rem;">Based on OnePlus 12R Global</p>
+    </a>
+
   </div>
+</section>
 
-  <script src="assets/boot.js"></script>
-  <script>
-    // Mobile nav toggle
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
+<script>
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
 
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      mobileMenu.classList.toggle('active');
-    });
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileMenu.classList.toggle('active');
+});
 
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        mobileMenu.classList.remove('active');
-      });
-    });
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+  });
+});
 
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.header') && !e.target.closest('.mobile-menu')) {
-        hamburger.classList.remove('active');
-        mobileMenu.classList.remove('active');
-      }
-    });
-  </script>
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.header') && !e.target.closest('.mobile-menu')) {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+  }
+});
+</script>
+
 </body>
 </html>
