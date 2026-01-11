@@ -49,7 +49,7 @@
         <img src="assets/cos16.png" alt="ColorOS 16">
       </div>
       <small>CHINA EDITION</small>
-      <h3>COLOROS 16</h3>
+      <h3>ColorOS 16</h3>
       <p>
         Ported version with authentic China build features and
         performance optimization for supported devices.
@@ -63,7 +63,7 @@
         <img src="assets/oos16.png" alt="OxygenOS 16">
       </div>
       <small>GLOBAL EDITION</small>
-      <h3>OXYGEN 16</h3>
+      <h3>OxygenOS 16</h3>
       <p>
         Clean and minimal OxygenOS with premium UI and refined features
         optimized for supported devices.
@@ -76,5 +76,31 @@
 
 <script src="assets/ai-assistant.js"></script>
 <script src="assets/boot.js?v=2"></script>
+
+<script>
+// Mobile nav toggle
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileMenu.classList.toggle('active');
+});
+
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+  });
+});
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.header') && !e.target.closest('.mobile-menu')) {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+  }
+});
+</script>
+
 </body>
 </html>

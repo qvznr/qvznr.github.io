@@ -253,6 +253,18 @@ header .logo {
   position: relative;
 }
 
+.light-wrap {
+  width: 100%;
+  max-width: 500px;
+}
+
+.light-wrap img {
+  max-width: 100%;
+  width: 100%;
+  display: block;
+  object-fit: contain;
+}
+
 .hero-right img {
   max-width: 500px;
   width: 100%;
@@ -749,6 +761,11 @@ footer {
 @media (max-width: 600px) {
   .header {
     padding: 16px 20px;
+  }
+
+  .logo {
+    font-size: 13px;
+    letter-spacing: 1px;
   }
 
   .hero {
