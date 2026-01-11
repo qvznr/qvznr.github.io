@@ -752,12 +752,21 @@ footer {
   .light-wrap {
     max-width: 320px;
     margin: 0 auto;
+    width: 100%;
   }
 
   .light-wrap img {
     width: 100%;
     height: auto;
     display: block;
+    transform: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+    filter: none;
+  }
+
+  .light-wrap::before {
+    display: none;
   }
 
   .scroll {
@@ -798,6 +807,26 @@ footer {
 
   .secondary h2 {
     font-size: 2.4rem;
+  }
+
+  .hero-right {
+    width: 100%;
+  }
+
+  .light-wrap {
+    max-width: 280px;
+    width: 100%;
+  }
+
+  .light-wrap img {
+    transform: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+    filter: brightness(1.1);
+  }
+
+  .light-wrap::before {
+    display: none;
   }
 
   .features {
