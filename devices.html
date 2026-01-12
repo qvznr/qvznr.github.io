@@ -32,7 +32,7 @@ body {
 }
 
 .devices-hero::before {
-  content: "ANTOM";
+  content: "DEVICE";
   position: absolute;
   font-family: 'Anton', sans-serif;
   font-size: 22vw;
@@ -59,14 +59,42 @@ body {
   font-size: 14px;
 }
 
-/* ===== SCROLL ===== */
+/* ===== SCROLL DOWN ANIMATION ===== */
 .scroll-down {
   position: absolute;
   right: 40px;
   bottom: 40px;
   writing-mode: vertical-rl;
   letter-spacing: 3px;
-  opacity: 0.5;
+  opacity: 0.6;
+  animation: scrollFloat 2.2s ease-in-out infinite;
+}
+
+@keyframes scrollFloat {
+  0% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+}
+
+.scroll-down .arrow {
+  margin-top: 10px;
+  font-size: 14px;
+  animation: arrowPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
 }
 
 /* ===== DEVICES ===== */
@@ -156,7 +184,10 @@ body {
     <h2>Choose your Device, then download via IDM</h2>
     <p>Ported by Aditya</p>
   </div>
-  <div class="scroll-down">SCROLL DOWN</div>
+  <div class="scroll-down">
+    SCROLL DOWN
+    <span class="arrow">↓</span>
+  </div>
 </section>
 
 <!-- ===== DEVICES ===== -->
