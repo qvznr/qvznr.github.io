@@ -11,19 +11,17 @@
     .hero {
       position: relative;
       height: 100vh;
+      background: #000;
       overflow: hidden;
-      background: black;
-      font-family: 'Poppins', sans-serif;
     }
 
     /* ===== Background Image ===== */
     .hero-bg {
       position: absolute;
       inset: 0;
-      background-image: url("assets/light.jpg");
-      background-repeat: no-repeat;
+      background: url("assets/door.png") no-repeat;
       background-size: cover;
-      background-position: 85% center;
+      background-position: 88% center;
     }
 
     /* ===== Dark Gradient ===== */
@@ -32,40 +30,31 @@
       inset: 0;
       background: linear-gradient(
         90deg,
-        rgba(0,0,0,0.96) 0%,
-        rgba(0,0,0,0.9) 35%,
-        rgba(0,0,0,0.6) 55%,
-        rgba(0,0,0,0.25) 70%,
-        rgba(0,0,0,0.05) 85%,
+        rgba(0,0,0,0.97) 0%,
+        rgba(0,0,0,0.92) 30%,
+        rgba(0,0,0,0.7) 50%,
+        rgba(0,0,0,0.35) 65%,
+        rgba(0,0,0,0.1) 80%,
         transparent 100%
       );
     }
 
-    /* ===== Real Door Glow ===== */
+    /* ===== Door Glow ===== */
     .hero-glow {
       position: absolute;
-      right: -120px;
+      right: -150px;
       top: 50%;
-      width: 900px;
-      height: 900px;
+      width: 1000px;
+      height: 1000px;
       transform: translateY(-50%);
       background: radial-gradient(
         circle,
         rgba(255,255,255,0.35) 0%,
-        rgba(255,255,255,0.18) 30%,
+        rgba(255,255,255,0.18) 28%,
         rgba(255,255,255,0.08) 45%,
         rgba(255,255,255,0.03) 60%,
         transparent 70%
       );
-      pointer-events: none;
-    }
-
-    /* ===== Film Grain ===== */
-    .hero-grain {
-      position: absolute;
-      inset: 0;
-      background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-      opacity: 0.05;
       pointer-events: none;
     }
 
@@ -101,8 +90,10 @@
     .hero h1 {
       font-family: 'Anton', sans-serif;
       font-size: 96px;
+      line-height: 0.95;
+      letter-spacing: -0.5px;
       color: rgba(255,255,255,0.88);
-      text-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      text-shadow: 0 10px 30px rgba(0,0,0,0.5);
       margin: 0 0 24px 0;
     }
 
@@ -196,14 +187,13 @@
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-glow"></div>
-  <div class="hero-grain"></div>
 
   <div class="hero-content">
     <span class="status">
       <span class="dot"></span> Actively Maintained
     </span>
 
-    <h1>Legends Never Die</h1>
+    <h1>Legends<br>Never Die</h1>
 
     <p class="subtitle">
       Bringing a New Life to Older OnePlus Devices
