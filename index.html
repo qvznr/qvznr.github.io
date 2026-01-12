@@ -15,13 +15,23 @@
       overflow: hidden;
     }
 
-    /* ===== Background Image ===== */
+    /* ===== Background ===== */
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: url("assets/light.png") no-repeat;
-      background-size: cover;
-      background-position: 88% center;
+      background: #000;
+    }
+
+    /* ===== Light image (fixed size) ===== */
+    .hero-light {
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      height: auto;
+      width: auto;
+      max-height: 90vh;
+      pointer-events: none;
     }
 
     /* ===== Dark Gradient ===== */
@@ -30,32 +40,13 @@
       inset: 0;
       background: linear-gradient(
         to right,
-        rgba(0,0,0,0.97) 0%,
-        rgba(0,0,0,0.92) 35%,
-        rgba(0,0,0,0.7) 50%,
-        rgba(0,0,0,0.35) 70%,
+        rgba(0,0,0,0.96) 0%,
+        rgba(0,0,0,0.9) 35%,
+        rgba(0,0,0,0.65) 55%,
+        rgba(0,0,0,0.3) 70%,
         rgba(0,0,0,0.1) 85%,
         transparent 100%
       );
-    }
-
-    /* ===== Door Glow ===== */
-    .hero-glow {
-      position: absolute;
-      right: -140px;
-      top: 50%;
-      width: 900px;
-      height: 900px;
-      transform: translateY(-50%);
-      background: radial-gradient(
-        circle,
-        rgba(255,255,255,0.45) 0%,
-        rgba(255,255,255,0.25) 30%,
-        rgba(255,255,255,0.1) 48%,
-        rgba(255,255,255,0.04) 60%,
-        transparent 72%
-      );
-      pointer-events: none;
     }
 
     /* ===== Content ===== */
@@ -89,16 +80,14 @@
     /* Title */
     .hero-title {
       font-family: 'Anton', sans-serif;
-      font-size: 120px;
+      font-size: 96px;
       font-weight: 400;
-      line-height: 0.9;
-      letter-spacing: -1px;
+      line-height: 1;
+      letter-spacing: -0.5px;
       white-space: nowrap;
-      color: rgba(255,255,255,0.88);
-      text-shadow: 0 12px 36px rgba(0,0,0,0.55);
-      margin: 0 0 28px 0;
-      transform: scaleX(1.05);
-      transform-origin: left center;
+      color: rgba(255,255,255,0.9);
+      text-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      margin: 0 0 24px 0;
     }
 
     /* Subtitle */
@@ -191,7 +180,7 @@
       }
 
       .hero-title {
-        font-size: 54px;
+        font-size: 48px;
       }
 
       .subtitle {
@@ -251,8 +240,8 @@
 <!-- ===== HERO ===== -->
 <section class="hero">
   <div class="hero-bg"></div>
+  <img src="assets/light.png" class="hero-light" alt="Light">
   <div class="hero-overlay"></div>
-  <div class="hero-glow"></div>
 
   <div class="hero-content">
     <span class="status">
