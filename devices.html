@@ -24,29 +24,40 @@ body {
 /* ===== HERO ===== */
 .devices-hero {
   height: 100vh;
+  display: grid;
+  place-items: center;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   overflow: hidden;
 }
 
-.devices-hero::before {
-  content: "DEVICE";
+.bg-text {
   position: absolute;
-  font-family: 'Anton', sans-serif;
-  font-size: 22vw;
-  font-weight: 400;
-  color: rgba(255,255,255,0.045);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  z-index: 0;
+  font-size: 26vw;
+  font-weight: 900;
+  letter-spacing: -10px;
+  font-family: "Anton", sans-serif;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.18),
+    rgba(255,255,255,0.02)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  pointer-events: none;
 }
 
 .hero-content {
   position: relative;
-  z-index: 1;
+  text-align: center;
+  z-index: 2;
+}
+
+.hero-line {
+  font-size: 15px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  text-align: center;
 }
 
 .hero-content h2 {
@@ -181,9 +192,11 @@ body {
 
 <!-- ===== HERO ===== -->
 <section class="devices-hero">
+  <div class="bg-text">DEVICES
+    <p class="hero-line" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 15px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.85); text-align: center; margin: 0; z-index: 10;">Choose your Device, then download via IDM</p>
+  </div>
+
   <div class="hero-content">
-    <h2>Choose your Device, then download via IDM</h2>
-    <p>Ported by Aditya</p>
   </div>
   <div class="scroll-down">
     SCROLL DOWN
