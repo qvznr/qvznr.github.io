@@ -73,40 +73,63 @@ body {
 
 /* ===== SCROLL DOWN ANIMATION ===== */
 .scroll-down {
-  position: absolute;
-  right: 40px;
-  bottom: 40px;
-  writing-mode: vertical-rl;
-  letter-spacing: 3px;
-  opacity: 0.6;
-  animation: scrollFloat 2.2s ease-in-out infinite;
+  position: fixed;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  z-index: 50;
 }
 
-@keyframes scrollFloat {
+.scroll-down.hidden {
+  display: none;
+}
+
+.scroll-arrow {
+  width: 24px;
+  height: 40px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-arrow::after {
+  content: '';
+  width: 2px;
+  height: 8px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 2px;
+  animation: scrollBounce 2s infinite;
+}
+
+@keyframes scrollBounce {
   0% {
-    transform: translateY(0);
-    opacity: 0.4;
+    transform: translateY(-6px);
+    opacity: 1;
   }
   50% {
-    transform: translateY(10px);
-    opacity: 0.8;
+    opacity: 1;
   }
   100% {
-    transform: translateY(0);
-    opacity: 0.4;
+    transform: translateY(6px);
+    opacity: 0;
   }
 }
 
-.scroll-down .arrow {
-  margin-top: 10px;
-  font-size: 14px;
-  animation: arrowPulse 1.4s ease-in-out infinite;
-}
-
-@keyframes arrowPulse {
-  0% { opacity: 0.2; }
-  50% { opacity: 1; }
-  100% { opacity: 0.2; }
+.scroll-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  opacity: 0.7;
 }
 
 /* ===== DEVICES ===== */
@@ -198,18 +221,19 @@ body {
 
   <div class="hero-content">
   </div>
-  <div class="scroll-down">
-    SCROLL DOWN
-    <span class="arrow">↓</span>
-  </div>
 </section>
+
+<div class="scroll-down" id="scrollDown">
+  <div class="scroll-arrow"></div>
+  <span class="scroll-label">Scroll</span>
+</div>
 
 <!-- ===== DEVICES ===== -->
 <section class="devices">
 
   <div class="device-card">
-    <img src="assets/8_img.png" alt="OnePlus 8">
-    <h3>OnePlus 8</h3>
+    <img src="assets/9_img.png" alt="OnePlus 9">
+    <h3>OnePlus 9</h3>
     <button onclick="location.href='roms.html'">
       DOWNLOAD
     </button>

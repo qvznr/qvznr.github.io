@@ -6,6 +6,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="assets/favicon.jpg" type="image/png">
   <link rel="stylesheet" href="style.css" />`n  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">>
+  <style>
+/* ===== SCROLL DOWN ANIMATION ===== */
+.scroll-down {
+  position: fixed;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  z-index: 50;
+}
+
+.scroll-down.hidden {
+  display: none;
+}
+
+.scroll-arrow {
+  width: 24px;
+  height: 40px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-arrow::after {
+  content: '';
+  width: 2px;
+  height: 8px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 2px;
+  animation: scrollBounce 2s infinite;
+}
+
+@keyframes scrollBounce {
+  0% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+}
+
+.scroll-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  opacity: 0.7;
+}
+
+/* Mobile */
+@media(max-width: 1024px) {
+  .scroll-down {
+    right: 20px;
+  }
+
+  .scroll-arrow {
+    width: 20px;
+    height: 32px;
+  }
+
+  .scroll-label {
+    font-size: 10px;
+  }
+}
+  </style>
 </head>
 <body>
 
@@ -32,6 +110,11 @@
   <a href="devices.html">Supported Device</a>
   <a href="installation.html">Installation Guide</a>
 </nav>
+
+<div class="scroll-down" id="scrollDown">
+  <div class="scroll-arrow"></div>
+  <span class="scroll-label">Scroll</span>
+</div>
 
 <!-- ===== ROM HERO ===== -->
 <section class="rom-hero">
