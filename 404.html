@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 - Page Not Found | Reimagine</title>
+  <link rel="icon" href="assets/favicon.jpg" type="image/png">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: #050507;
+      color: white;
+      font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont;
+      overflow: hidden;
+    }
+
+    .error-container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Massive background text */
+    .bg-404 {
+      position: absolute;
+      font-size: 40vw;
+      font-weight: 900;
+      letter-spacing: -20px;
+      font-family: "Anton", sans-serif;
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.12),
+        rgba(255,255,255,0.02)
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+    }
+
+    .error-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 600px;
+      padding: 0 40px;
+    }
+
+    .error-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: #ff5c5c;
+      background: rgba(255,92,92,0.15);
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .error-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin: 0 0 16px 0;
+      background: linear-gradient(to bottom, #fff 30%, rgba(255,255,255,0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-family: "Anton", sans-serif;
+      letter-spacing: 2px;
+    }
+
+    .error-description {
+      font-size: 1.1rem;
+      color: #888;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .error-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: white;
+      color: black;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-3px);
+    }
+
+    /* Floating particles */
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      animation: float 20s infinite;
+      opacity: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.5;
+      }
+      90% {
+        opacity: 0.5;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(100px);
+        opacity: 0;
+      }
+    }
+
+    .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .particle:nth-child(2) { left: 20%; animation-delay: 4s; }
+    .particle:nth-child(3) { left: 30%; animation-delay: 8s; }
+    .particle:nth-child(4) { left: 40%; animation-delay: 2s; }
+    .particle:nth-child(5) { left: 50%; animation-delay: 6s; }
+    .particle:nth-child(6) { left: 60%; animation-delay: 10s; }
+    .particle:nth-child(7) { left: 70%; animation-delay: 3s; }
+    .particle:nth-child(8) { left: 80%; animation-delay: 7s; }
+    .particle:nth-child(9) { left: 90%; animation-delay: 1s; }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .bg-404 {
+        font-size: 50vw;
+      }
+
+      .error-title {
+        font-size: 2.5rem;
+      }
+
+      .error-description {
+        font-size: 1rem;
+      }
+
+      .error-buttons {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="logo">Reimagine</div>
+  <nav class="nav" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="roms.html">Explore ROMs</a>
+    <a href="devices.html">Supported Device</a>
+    <a href="installation.html">Installation Guide</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="roms.html">Explore ROMs</a>
+  <a href="devices.html">Supported Device</a>
+  <a href="installation.html">Installation Guide</a>
+</nav>
+
+<!-- Error Container -->
+<div class="error-container">
+  <!-- Background 404 -->
+  <div class="bg-404">404</div>
+
+  <!-- Floating particles -->
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+
+  <!-- Content -->
+  <div class="error-content">
+    <span class="error-badge">● Error 404</span>
+    <h1 class="error-title">Page Not Found</h1>
+    <p class="error-description">
+      Looks like you've wandered into uncharted territory. The page you're looking for doesn't exist or has been moved.
+    </p>
+    <div class="error-buttons">
+      <a href="index.html" class="btn btn-primary">Go Home</a>
+      <a href="devices.html" class="btn btn-secondary">Browse Devices</a>
+    </div>
+  </div>
+</div>
+
+<script src="assets/boot.js"></script>
+<script>
+// Mobile menu toggle
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+if (hamburger) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+  });
+}
+
+if (mobileMenu) {
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('active');
+    });
+  });
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.header') && !e.target.closest('.mobile-menu')) {
+    if (hamburger) hamburger.classList.remove('active');
+    if (mobileMenu) mobileMenu.classList.remove('active');
+  }
+});
+</script>
+
+</body>
+</html>
