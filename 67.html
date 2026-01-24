@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>67 - Easter Egg</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        
+        .easter-egg-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 60px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            animation: fadeIn 1s ease-in;
+        }
+        
+        .number-67 {
+            font-size: 120px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00d4ff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 2s ease-in-out infinite, rotate 4s linear infinite;
+            margin: 0;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+        }
+        
+        h1 {
+            color: #fff;
+            margin-top: 30px;
+            font-size: 36px;
+            animation: slideDown 0.8s ease-out;
+        }
+        
+        p {
+            color: #e0e0e0;
+            font-size: 18px;
+            margin: 20px 0;
+            line-height: 1.6;
+            animation: slideUp 0.8s ease-out 0.2s both;
+        }
+        
+        .secret-message {
+            color: #00d4ff;
+            font-style: italic;
+            font-size: 16px;
+            margin-top: 40px;
+            animation: blink 1.5s ease-in-out infinite 0.5s;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 12px 30px;
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 2px solid #00d4ff;
+            transition: all 0.3s ease;
+            animation: slideUp 0.8s ease-out 0.4s both;
+        }
+        
+        .back-link:hover {
+            background: #00d4ff;
+            color: #764ba2;
+            box-shadow: 0 0 20px #00d4ff;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 60px rgba(0, 212, 255, 0.8);
+            }
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes blink {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+        
+        .particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(0, 212, 255, 0.5);
+            border-radius: 50%;
+            animation: float 10s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <div class="easter-egg-container">
+        <div class="number-67">67</div>
+        <h1>You Found It! 🎉</h1>
+        <p>Welcome to the hidden corner of the Reimagine website!</p>
+        <p>The number 67 holds special meaning. It's a perfect intersection of randomness and meaning.</p>
+        <p>Some say it's the answer to a question you haven't asked yet...</p>
+        <p class="secret-message">⚡ Keep exploring ⚡</p>
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </div>
+    
+    <script>
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            const size = Math.random() * 4 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            particle.style.animationDelay = Math.random() * 2 + 's';
+            
+            particlesContainer.appendChild(particle);
+            
+            setTimeout(() => particle.remove(), 10000);
+        }
+        
+        // Create initial particles
+        for (let i = 0; i < 20; i++) {
+            createParticle();
+        }
+        
+        // Continuously create new particles
+        setInterval(createParticle, 500);
+        
+        // Easter egg message in console
+        console.log('%c🎉 You found the 67 Easter Egg! 🎉', 'font-size: 20px; color: #00d4ff; font-weight: bold;');
+        console.log('%cYou are truly special for exploring the hidden corners of Reimagine.', 'font-size: 14px; color: #e0e0e0;');
+    </script>
+</body>
+</html>
